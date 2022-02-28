@@ -64,21 +64,6 @@ class Game():
         self.DIVIDER = "===================================================================\
 ======================================="
 
-    def showMenu(self):
-        print(f'{Bcolors.UNDERLINE}{ Bcolors.OKCYAN}Press 1\
-to play vs the computer.')
-        print(f'Press 2 for 2 players.{Bcolors.NOT_UNDERLINED}')
-        choice = [1, 2]
-        option = 0
-        while option not in choice:
-            try:
-                option = int(input(f'{Bcolors.OKCYAN}Please input 1 or 2 \
-depending on your choice: {Bcolors.RESET}'))
-            except ValueError:
-                print(f'{Bcolors.FAIL} Please enter a valid value (1, 2)')
-                print('\n')
-        return option
-
     def showOptionMenu(self):
         print('Enter 1 to roll the dice')
         print('Enter 2 to hold your score')

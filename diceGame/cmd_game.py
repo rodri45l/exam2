@@ -25,5 +25,6 @@ their gained score for the turn if they roll a 1.\n{LetCol.HEADER}{DIVIDER}'
         else:
             print(f"please press 1 or 2 (you pressed: {arg})")
 
+
 if __name__ == '__main__':
     PigGame().cmdloop()

@@ -138,7 +138,8 @@ Computer: {computer.score}")
                     print(f'{Bcolors.OKBLUE}Your score for this turn is:\
     {player.turn_score}')
             else:
-                print(f'{Bcolors.FAIL}!!!!!!\nPlease enter a valid option\n!!!!!!')
+                print(f'{Bcolors.FAIL}!!!!!!\nPlease enter a \
+valid option\n!!!!!!')
                 self.playerTurn(player)
         print(f"{Bcolors.OKBLUE}Your score this turn is {player.turn_score}")
         player.sum_turn_score()
@@ -165,9 +166,11 @@ Computer: {computer.score}")
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while(player1.score < 100 and player2.score < 100):
-            print(f"{self.DIVIDER}\n{player1.name} It's Your turn!\n{self.DIVIDER}")
+            print(f"{self.DIVIDER}\n{player1.name}\
+It's Your turn!\n{self.DIVIDER}")
             player1 = self.playerTurn(player1)
-            print(f"{self.DIVIDER}\n{player2.name} It's Your turn!\n{self.DIVIDER}")
+            print(f"{self.DIVIDER}\n{player2.name}\
+It's Your turn!\n{self.DIVIDER}")
             player2 = self.playerTurn(player2)
             print(f'{self.DIVIDER}\nProbabilites to win:\n{player1.name}: \
 {prob.pWin(player1.score, player2.score, 0):.2f}\n{player2.name}: \

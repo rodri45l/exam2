@@ -201,10 +201,3 @@ YOU WIN!!{Bcolors.RESET}')
             print(f'{Bcolors.FAIL}You lose, computers > humans')
             print(f"Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}")
-
-    def play(self):
-        playersOPtion = self.showMenu()
-        if playersOPtion == 1:
-            self.playerVsMachine()
-        else:
-            self.playerVsPlayer()

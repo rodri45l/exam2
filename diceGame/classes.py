@@ -4,6 +4,29 @@ from random import randint
 import pickle
 
 
+class Game():
+    """Game class with with methods for the game"""
+    def __init__(self):
+        self.GOAL = 100
+        self.DIVIDER = "===================================================================\
+======================================="
+    def showMenu():
+        print(f'{LetCol.UNDERLINE}{ LetCol.OKCYAN}Press 1\
+    to play vs the computer.')
+        print(f'Press 2 for 2 players.{LetCol.NOT_UNDERLINED}')
+        choice = [1, 2]
+        option = 0
+        while option not in choice:
+            try:
+                option = int(input(f'{LetCol.OKCYAN}Please input 1 or 2 \
+    depending on your choice: {LetCol.RESET}'))
+            except ValueError:
+                print(f'{LetCol.FAIL} Please enter a valid value (1, 2)')
+                print('\n')
+        return option
+
+
+
 class Player():
     """Player class with name, score, tries and wins atributes"""
     def __init__(self, name):

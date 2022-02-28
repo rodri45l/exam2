@@ -5,14 +5,13 @@ import pickle
 import should_roll as prob
 
 
-
 class Player():
     """Player class with name, score, tries and wins atributes"""
     def __init__(self, name):
         self.name = name
         self.score = 0
         self.won = False
-        if(name in['RODRI45Z', 'HIVA', 'YANA']):  # CHEAT CODE
+        if(name in ['RODRI45Z', 'HIVA', 'YANA']):  # CHEAT CODE
             self.score = 99
         self.turn_score = 0
 
@@ -56,6 +55,7 @@ class Bcolors:
     NOT_UNDERLINED = '\033[24m'
     RESET = '\u001b[0m'
 
+
 class Scoreboard():
     def __init__(self):
         try:
@@ -66,17 +66,17 @@ class Scoreboard():
             sb = dict()
         finally:
             self.scoreboard = sb
-    
+
     def print_scorebard(self):
         print('Scoreboard')
         print('##########################################################################################################')
         for key, item in self.scoreboard.items():
             print(f'{Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches played: {item[1]} Winrate: {(item[0]/item[1])*100}%')
-    
+
     def save_scoreboard(self):
         with open('./diceGame/scoreboard.pickle', 'wb') as handle:
             pickle.dump(self.scoreboard, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    
+
     def update_player(self, player):
         """updates player to scoreboard, if there is no coincidence it creates a new player"""
         if player.won:

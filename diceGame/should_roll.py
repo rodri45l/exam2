@@ -7,7 +7,7 @@ and equations from http://cs.gettysburg.edu/~tneller/papers/pig.zip"""
 
 GOAL = 100
 
-with open('./DiceGame/probabilities_list.pickle', 'rb') as fp:
+with open('./diceGame/probabilities_list.pickle', 'rb') as fp:
     p = pickle.load(fp)
 
 for x1 in range(0, 100):

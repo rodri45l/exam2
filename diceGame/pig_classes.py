@@ -5,14 +5,14 @@ import pickle
 import should_roll as prob
 
 
+
 class Player():
     """Player class with name, score, tries and wins atributes"""
     def __init__(self, name):
         self.name = name
         self.score = 0
-        self.wins = 0
-        self.tries = 0
-        if name == 'RODRI45Z':  # CHEAT CODE
+        self.won = False
+        if(name in['RODRI45Z', 'HIVA', 'YANA']):  # CHEAT CODE
             self.score = 99
         self.turn_score = 0
 
@@ -56,6 +56,46 @@ class Bcolors:
     NOT_UNDERLINED = '\033[24m'
     RESET = '\u001b[0m'
 
+class Scoreboard():
+    def __init__(self):
+        try:
+            with open('./diceGame/scoreboard.pickle', 'rb') as handle:
+                sb = pickle.load(handle)
+        except FileNotFoundError:
+            print('No scoreboard found, creating a new one')
+            sb = dict()
+        finally:
+            self.scoreboard = sb
+    
+    def print_scorebard(self):
+        print('Scoreboard')
+        print('##########################################################################################################')
+        for key, item in self.scoreboard.items():
+            print(f'{Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches played: {item[1]} Winrate: {(item[0]/item[1])*100}%')
+    
+    def save_scoreboard(self):
+        with open('./diceGame/scoreboard.pickle', 'wb') as handle:
+            pickle.dump(self.scoreboard, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    
+    def update_player(self, player):
+        """updates player to scoreboard, if there is no coincidence it creates a new player"""
+        if player.won:
+            try:
+                self.scoreboard[player.name] = self.scoreboard[player.name][0]+1, self.scoreboard[player.name][1]+1
+            except KeyError:
+                data = [1, 1]
+                self.scoreboard[player.name] = data
+            finally:
+                self.save_scoreboard()
+        else:
+            try:
+                self.scoreboard[player.name] = self.scoreboard[player.name][0], self.scoreboard[player.name][1]+1
+            except KeyError:
+                data = [0, 1]
+                self.scoreboard[player.name] = data
+            finally:
+                self.save_scoreboard()
+
 
 class Game():
     """Game class with with methods for the game"""
@@ -92,10 +132,13 @@ enter your name: {Bcolors.RESET}"))
             print(f'{Bcolors.OKGREEN}CONGRATULATIONS {player.name} YOU WIN!! Humans \
 > Computers{Bcolors.RESET}')
             print(f'{self.DIVIDER}')
+            player.won = True
         elif computer.score >= self.GOAL:
             print(f'{Bcolors.FAIL}You lose, computers > humans')
             print(f"Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}")
+        scoreboard = Scoreboard()
+        scoreboard.update_player(player)
 
     def playerTurn(self, player):
         option = 0
@@ -154,35 +197,27 @@ valid option\n!!!!!!')
             print(f"{self.DIVIDER}\n{player1.name}\
 It's Your turn!\n{self.DIVIDER}")
             player1 = self.playerTurn(player1)
+            if player1.score >= 100:
+                break
             print(f"{self.DIVIDER}\n{player2.name}\
 It's Your turn!\n{self.DIVIDER}")
             player2 = self.playerTurn(player2)
+            if player2.score >= 100:
+                break
             print(f'{self.DIVIDER}\nProbabilites to win:\n{player1.name}: \
-{prob.pWin(player1.score, player2.score, 0):.2f}\n{player2.name}: \
-{prob.pWin(player2.score, player1.score, 0):.2f}\n{self.DIVIDER}')
+{prob.p_win(player1.score, player2.score, 0):.2f}\n{player2.name}: \
+{prob.p_win(player2.score, player1.score, 0):.2f}\n{self.DIVIDER}')
         if player1.score >= self.GOAL:
-            print(f'{Bcolors.OKGREEN} CONGRATULATIONS {player1.name}\
-YOU WIN!!{Bcolors.RESET}')
+            print(f'{Bcolors.OKGREEN}CONGRATULATIONS {player1.name}\
+ YOU WIN!!{Bcolors.RESET}')
+            player1.won = True
 
         elif player2.score >= self.GOAL:
-            print(f'{Bcolors.OKGREEN} CONGRATULATIONS {player2.name} YOU WIN!!\
+            print(f'{Bcolors.OKGREEN}CONGRATULATIONS {player2.name} YOU WIN!!\
 {Bcolors.RESET}')
+            player2.won = True
         print(f"Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}")
-
-        player = self.createPlayer(1)
-        computer = Player("Computer")
-        while(player.score < 100 and computer.score < 100):
-            player = self.playerTurn(player)
-            computer = self.computerTurn(computer, player)
-            print(f'Your probabilities to win are: \
-{prob.pWin(player.score, computer.score, 0):.2f}')
-
-        if player.score >= self.GOAL:
-            print(f'{Bcolors.OKGREEN}CONGRATULATIONS {player.name} YOU WIN!! Humans \
-> Computers{Bcolors.RESET}')
-            print(f'{self.DIVIDER}')
-        elif computer.score >= self.GOAL:
-            print(f'{Bcolors.FAIL}You lose, computers > humans')
-            print(f"Final Score:\n{player.name}: {player.score}\n\
-Computer: {computer.score}")
+        scoreboard = Scoreboard()
+        scoreboard.update_player(player1)
+        scoreboard.update_player(player2)

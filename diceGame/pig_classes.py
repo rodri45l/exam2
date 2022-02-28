@@ -39,7 +39,7 @@ class Dice():
             dice_face_dic = pickle.load(handle)
             self.roll = randint(1, 6)
         if print_dice:
-            print(dice_face_dic[self.roll] + '\n')
+            print('\n' + dice_face_dic[self.roll] + '\n')
 
 
 class Bcolors:

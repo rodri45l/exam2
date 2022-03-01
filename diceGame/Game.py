@@ -1,8 +1,10 @@
+from tkinter import E
 from Bcolors import Bcolors
 import should_roll as prob
 from Player import Player
 from Scoreboard import Scoreboard
 from Dice import Dice
+from random import randint
 
 
 class Game():
@@ -24,18 +26,27 @@ class Game():
         player = Player(input(f"{Bcolors.OKCYAN}Please Player{n} \
 enter your name: {Bcolors.RESET}"))
         return player
+    
+    def set_difficulty(self):
+        """returns the difficulty mode"""
+        difficulty = 0
+        while difficulty not in [1, 2]:
+            print("1. Easy mode\n2. Hard mode.")
+            difficulty  = int(input("Please enter the difficulty: "))
+        return difficulty
 
     def playerVsMachine(self):
         """ Player will compete with computer -
         both will play and winner will be displayed
         """
         player = self.createPlayer(1)
+        difficulty = self.set_difficulty()
         computer = Player("Computer")
         while(player.score < 100 and computer.score < 100):
             player = self.playerTurn(player)
             if player.score >= 100:
                 break
-            computer = self.computerTurn(computer, player)
+            computer = self.computerTurn(computer, player, difficulty)
             if computer.score >= 100:
                 break
             print(f'Your probabilities to win are: \
@@ -89,10 +100,18 @@ valid option\n!!!!!!')
 
         return player
 
-    def computerTurn(self, computer, player):
+    def computerTurn(self, computer, player, difficulty):
         """ Computer turn - role the dice and get the score and total score for this turn """
         dice = Dice()
         while prob.should_roll(computer.score, player.score, computer.turn_score):
+            if difficulty == 1:
+                random = randint(1, 2)
+                if random == 2:
+                    break
+                else:
+                    pass
+            else:
+                pass
             dice.roll_dice(False)
             if dice.roll == 1:
                 computer.turn_score = 0

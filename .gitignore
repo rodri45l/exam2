@@ -6,3 +6,4 @@ htmlcov/
 dice/doc
 guess/doc
 .vscode
+.idea

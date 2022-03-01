@@ -2,6 +2,7 @@
 import pickle
 from Bcolors import Bcolors
 
+
 class Scoreboard():
     def __init__(self):
         try:

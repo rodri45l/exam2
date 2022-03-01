@@ -1,0 +1,10 @@
+digraph "classes" {
+rankdir=BT
+charset="utf-8"
+"Bcolors.Bcolors" [color="black", fontcolor="black", label="{Bcolors|BOLD : str\lENDC : str\lFAIL : str\lHEADER : str\lNOT_UNDERLINED : str\lOKBLUE : str\lOKCYAN : str\lOKGREEN : str\lRESET : str\lUNDERLINE : str\lWARNING : str\l|}", shape="record", style="solid"];
+"Dice.Dice" [color="black", fontcolor="black", label="{Dice|roll : int\l|roll_dice(print_dice)\l}", shape="record", style="solid"];
+"Game.Game" [color="black", fontcolor="black", label="{Game|DIVIDER : str\lGOAL : int\l|computerTurn(computer, player, difficulty)\lcreatePlayer(n)\lplayerTurn(player)\lplayerVsMachine()\lplayerVsPlayer()\lset_difficulty()\lshowOptionMenu()\l}", shape="record", style="solid"];
+"cmd_game.PigGame" [color="black", fontcolor="black", label="{PigGame|DIVIDER : str\lintro\lprompt\l|do_bye(arg)\ldo_play(arg)\ldo_rules(arg)\ldo_scoreboard(arg)\l}", shape="record", style="solid"];
+"Player.Player" [color="black", fontcolor="black", label="{Player|name\lscore : int\lturn_score : int\lwon : bool\l|change_name(name)\lsum_turn_score()\l}", shape="record", style="solid"];
+"Scoreboard.Scoreboard" [color="black", fontcolor="black", label="{Scoreboard|scoreboard : dict\l|print_scorebard()\lsave_scoreboard()\lupdate_player(player)\l}", shape="record", style="solid"];
+}

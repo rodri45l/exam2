@@ -1,4 +1,6 @@
 """Player class file"""
+
+
 class Player():
     """Player class with name, score, tries and wins atributes"""
     def __init__(self, name):

@@ -1,4 +1,5 @@
 from Bcolors import Bcolors;
+import should_roll as prob
 
 class Game():
     """Game class with methods for the game"""

@@ -1,5 +1,6 @@
 import cmd
-from pig_classes import Game, Scoreboard
+from Game import Game
+from Scoreboard import Scoreboard
 from Bcolors import Bcolors as LetCol
 
 

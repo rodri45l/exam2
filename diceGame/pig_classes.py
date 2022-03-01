@@ -4,6 +4,9 @@
 from random import randint
 import pickle
 import should_roll as prob
+from Bcolors import Bcolors
+from Dice import Dice
+from Player import Player
 
 
 class Scoreboard():

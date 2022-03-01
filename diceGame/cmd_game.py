@@ -24,6 +24,7 @@ class PigGame(cmd.Cmd):
             print(f"please press 1 or 2 (you pressed: {arg})")
 
     def do_scoreboard(self, arg):
+        'Prints Scoreboard'
         scoreboard = Scoreboard()
         scoreboard.print_scorebard()
 

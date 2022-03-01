@@ -3,7 +3,7 @@
 # Change this to be your variant of the python command
 # Set the env variable PYTHON to another value if needed
 # PYTHON=python3 make version
-PYTHON ?= python # python3 py
+PYTHON ?= python3 # python3 py
 
 # Print out colored action message
 MESSAGE = printf "\033[32;01m---> $(1)\033[0m\n"
@@ -62,11 +62,11 @@ clean-all: clean clean-doc
 #
 pylint:
 	@$(call MESSAGE,$@)
-	-cd diceGame && py -m pylint *.py
+	-cd diceGame && python3 -m pylint *.py
 
 flake8:
 	@$(call MESSAGE,$@)
-	-cd diceGame && py -m flake8 *.py
+	-cd diceGame && python3 -m flake8 *.py
 
 lint: flake8 pylint
 
@@ -76,7 +76,7 @@ lint: flake8 pylint
 #
 black:
 	@$(call MESSAGE,$@)
-	 $(PYTHON) -m black guess/ test/
+	 $(PYTHON) -m black diceGame/ test/
 
 codestyle: black
 
@@ -104,17 +104,17 @@ test: lint coverage
 pydoc:
 	@$(call MESSAGE,$@)
 	install -d doc/pydoc
-	$(PYTHON) -m pydoc -w guess/*.py
+	$(PYTHON) -m pydoc -w diceGame/*.py
 	mv *.html doc/pydoc
 
 pdoc:
 	@$(call MESSAGE,$@)
-	pdoc --force --html --output-dir doc/pdoc guess/*.py
+	pdoc --force --html --output-dir doc/pdoc diceGame/*.py
 
 pyreverse:
 	@$(call MESSAGE,$@)
 	install -d doc/pyreverse
-	pyreverse guess/*.py
+	pyreverse diceGame/*.py
 	dot -Tpng classes.dot -o doc/pyreverse/classes.png
 	dot -Tpng packages.dot -o doc/pyreverse/packages.png
 	rm -f classes.dot packages.dot

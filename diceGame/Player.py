@@ -1,8 +1,9 @@
 """Player class file"""
 
 
-class Player():
+class Player:
     """Player class with name, score, tries and wins atributes"""
+
     def __init__(self, name):
         """Constructor, takes name as argument and sets score to 0 and won to False.
         It also has a cheat code implemented for certain player names.
@@ -10,7 +11,7 @@ class Player():
         self.name = name
         self.score = 0
         self.won = False
-        if(name in ['RODRI45Z', 'HIVA', 'YANA']):  # CHEAT CODE
+        if name in ["RODRI45Z", "HIVA", "YANA"]:  # CHEAT CODE
             self.score = 99
         self.turn_score = 0
 

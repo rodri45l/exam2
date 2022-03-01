@@ -27,6 +27,7 @@ class Scoreboard():
         """updates player to scoreboard, if there is no coincidence it creates a new player"""
         if player.won:
             try:
+                """Scoreboard a dictionary key name and value 0 wins count and games played"""
                 self.scoreboard[player.name] = self.scoreboard[player.name][0]+1, self.scoreboard[player.name][1]+1
             except KeyError:
                 data = [1, 1]

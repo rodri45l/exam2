@@ -1,5 +1,9 @@
-from Bcolors import Bcolors;
+from Bcolors import Bcolors
 import should_roll as prob
+from Player import Player
+from Scoreboard import Scoreboard
+from Dice import Dice
+
 
 class Game():
     """Game class with methods for the game"""
@@ -9,20 +13,22 @@ class Game():
 ======================================="
 
     def showOptionMenu(self):
-     """ Printing a menu with option of playing or not for the turn """
+        """ Printing a menu with option of playing or not for the turn """
         print('Enter 1 to roll the dice')
         print('Enter 2 to hold your score')
         option2 = int(input(f'Enter your choice: {Bcolors.RESET}'))
         return option2
 
     def createPlayer(self, n):
-    """ Creating player """
+        """ Creating player """
         player = Player(input(f"{Bcolors.OKCYAN}Please Player{n} \
 enter your name: {Bcolors.RESET}"))
         return player
 
     def playerVsMachine(self):
-    """ Player will compete with computer - both will play and winner will be displayed """
+        """ Player will compete with computer -
+        both will play and winner will be displayed
+        """
         player = self.createPlayer(1)
         computer = Player("Computer")
         while(player.score < 100 and computer.score < 100):
@@ -48,7 +54,7 @@ Computer: {computer.score}")
         scoreboard.update_player(player)
 
     def playerTurn(self, player):
-    """ it is Player turn - role the dice and get the score and total score for this turn """
+        """ it is Player turn - role the dice and get the score and total score for this turn """
         option = 0
         keepRunning = True
         x = Dice()
@@ -84,13 +90,14 @@ valid option\n!!!!!!')
         return player
 
     def computerTurn(self, computer, player):
-    """ Computer turn - role the dice and get the score and total score for this turn """
+        """ Computer turn - role the dice and get the score and total score for this turn """
         dice = Dice()
         while prob.should_roll(computer.score, player.score, computer.turn_score):
             dice.roll_dice(False)
             if dice.roll == 1:
                 computer.turn_score = 0
                 print(f"Computer score this turn is {computer.score}")
+                print(f"Computer Total score is {computer.score}")
                 return computer
             else:
                 computer.turn_score += dice.roll
@@ -100,7 +107,7 @@ valid option\n!!!!!!')
         return computer
 
     def playerVsPlayer(self):
-    """ Two players playing - both will play and one would win and one would lose """
+        """ Two players playing - both will play and one would win and one would lose """
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while(player1.score < 100 and player2.score < 100):

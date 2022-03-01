@@ -8,7 +8,8 @@ class PigGame(cmd.Cmd):
     DIVIDER = "===================================================================\
 ======================================="
     intro = f'{LetCol.HEADER}{DIVIDER}\n\
-{LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n{LetCol.HEADER}{DIVIDER}'
+{LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
+{LetCol.HEADER}{DIVIDER}'
 
     prompt = f'{LetCol.WARNING}(Pig Game) '
 
@@ -35,7 +36,8 @@ class PigGame(cmd.Cmd):
         'Show game rules.'
         DIVIDER = "===================================================================\
 ======================================="
-        print(f'{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the first player to \
+        print(f'{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the\
+first player to \
 reach 100 points{LetCol.OKCYAN}\n\
 Players take turns to roll a single dice as many times\
  as they wish,    \nadding all roll results to a running total, but losing \

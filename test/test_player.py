@@ -19,3 +19,16 @@ class TestDice(unittest.TestCase):
         player = Player.Player("RODRI45Z")
         exp = player.score == 99
         self.assertTrue(exp)
+    
+    def test_sum_turnscore(self):
+        player = Player.Player("RODRI45Z")
+        player.turn_score = 1
+        player.sum_turn_score()
+        exp = player.score == 100
+        self.assertTrue(exp)
+    
+    def test_change_name(self):
+        player = Player.Player("RODRI45Z")
+        player.change_name("Pete")
+        exp = player.name == "Pete"
+        self.assertTrue(exp)

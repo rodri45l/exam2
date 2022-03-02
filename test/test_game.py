@@ -12,5 +12,5 @@ class TestDice(unittest.TestCase):
     def test_Dice(self):
         '''Test Dice class'''
         game = Game.Game()
-        self.assertIsInstance(game, Game.Game())
+        self.assertIsInstance(game, Game.Game)
     

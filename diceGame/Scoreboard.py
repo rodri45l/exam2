@@ -1,5 +1,5 @@
 import pickle
-from Bcolors import Bcolors
+import Bcolors as B
 
 
 class Scoreboard:
@@ -21,7 +21,7 @@ class Scoreboard:
         )
         for key, item in self.scoreboard.items():
             print(
-                f"{Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches\
+                f"{B.Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches\
 played: {item[1]} Winrate: {(item[0]/item[1])*100}%"
             )
 

@@ -28,11 +28,6 @@ class PigGame(cmd.Cmd):
         scoreboard = Scoreboard()
         scoreboard.print_scorebard()
 
-    def do_bye(self, arg):
-        "close the game."
-        print("Thank you for playing. bye!!")
-        return True
-
     def do_rules(self, arg):
         "Show game rules."
         DIVIDER = "===================================================================\

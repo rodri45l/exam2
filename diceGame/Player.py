@@ -11,6 +11,7 @@ class Player:
         self.name = name
         self.score = 0
         self.won = False
+        self.old_name = name
         if name in ["RODRI45Z", "HIVA", "YANA"]:  # CHEAT CODE
             self.score = 99
         self.turn_score = 0

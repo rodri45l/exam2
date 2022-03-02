@@ -20,8 +20,9 @@ class Game:
         try:
             print("Enter 1 to roll the dice")
             print("Enter 2 to hold your score")
-            print("Enter 3 to restart")
-            print("Enter 4 to exit the game")
+            print("Enter 3 to change your name")
+            print("Enter 4 to restart")
+            print("Enter 5 to exit the game")
             option2 = int(input(f"Enter your choice: {Bcolors.RESET}"))
         except ValueError:
             print('Invalid option')
@@ -100,13 +101,17 @@ Computer: {computer.score}"
             option = self.showOptionMenu()
             if option == 2:
                 keepRunning = False
-            elif option == 3:
+            elif option == 4:
                 print("restarting the game...")
                 player.score = -2
                 return player
-            elif option == 4:
+            elif option == 5:
+                print('Game halted!')
                 player.score = -1
                 return player
+            elif option == 3:
+                self.change_name(player)
+                pass
             elif option == 1:
                 x.roll_dice(True)
 
@@ -131,7 +136,6 @@ Computer: {computer.score}"
                     f"{Bcolors.FAIL}!!!!!!\nPlease enter a \
 valid option\n!!!!!!"
                 )
-                self.playerTurn(player)
         print(f"{Bcolors.OKBLUE}Your score this turn is {player.turn_score}")
         player.sum_turn_score()
         print(f"{player.name}'s Total score this turn is {player.score}")
@@ -217,3 +221,7 @@ It's Your turn!\n{self.DIVIDER}"
         scoreboard = Scoreboard()
         scoreboard.update_player(player1)
         scoreboard.update_player(player2)
+
+    def change_name(self, player):
+        new_name = input('Enter new name: ')
+        player.change_name(new_name)

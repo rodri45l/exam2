@@ -23,9 +23,10 @@ class Scoreboard:
 ############################################"
         )
         for key, item in self.scoreboard.items():
+            wr = item[0]/item[1]
             print(
                 f"{B.Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches\
-played: {item[1]} Winrate: {(item[0]/item[1])*100}%"
+played: {item[1]} Winrate: {(wr*100):.2f}%"
             )
 
     def save_scoreboard(self):
@@ -36,27 +37,63 @@ played: {item[1]} Winrate: {(item[0]/item[1])*100}%"
     def update_player(self, player):
         """Updates player's score and if there are no errors it creates a new player"""
         if player.won:
-            try:
-                """Scoreboard a dictionary key name.
-                value 0 wins count and value 1 games played
-                """
-                self.scoreboard[player.name] = (
-                    self.scoreboard[player.name][0] + 1,
-                    self.scoreboard[player.name][1] + 1,
-                )
-            except KeyError:
-                data = [1, 1]
-                self.scoreboard[player.name] = data
-            finally:
-                self.save_scoreboard()
+            if player.name == player.old_name:
+                try:
+                    """Scoreboard a dictionary key name.
+                    value 0 wins count and value 1 games played
+                    """
+                    self.scoreboard[player.name] = (
+                        self.scoreboard[player.name][0] + 1,
+                        self.scoreboard[player.name][1] + 1,
+                    )
+                except KeyError:
+                    data = [1, 1]
+                    self.scoreboard[player.name] = data
+                finally:
+                    self.save_scoreboard()
+            else:
+                try:
+                    """Scoreboard a dictionary key name.
+                    value 0 wins count and value 1 games played
+                    """
+                    self.scoreboard[player.name] = (
+                        # Store old data with new name
+                        self.scoreboard[player.old_name][0] + 1,
+                        self.scoreboard[player.old_name][1] + 1,
+                    )
+                    self.scoreboard.pop(player.old_name)
+                    # remove data to avoid duplicates
+                except KeyError:
+                    data = [1, 1]
+                    self.scoreboard[player.name] = data
+                finally:
+                    self.save_scoreboard()
         else:
-            try:
-                self.scoreboard[player.name] = (
-                    self.scoreboard[player.name][0],
-                    self.scoreboard[player.name][1] + 1,
-                )
-            except KeyError:
-                data = [0, 1]
-                self.scoreboard[player.name] = data
-            finally:
-                self.save_scoreboard()
+            if player.name == player.old_name:
+                try:
+                    self.scoreboard[player.name] = (
+                        self.scoreboard[player.name][0],
+                        self.scoreboard[player.name][1] + 1,
+                    )
+                except KeyError:
+                    data = [0, 1]
+                    self.scoreboard[player.name] = data
+                finally:
+                    self.save_scoreboard()
+            else:
+                try:
+                    """Scoreboard a dictionary key name.
+                    value 0 wins count and value 1 games played
+                    """
+                    self.scoreboard[player.name] = (
+                        # Store old data with new name
+                        self.scoreboard[player.old_name][0],
+                        self.scoreboard[player.old_name][1] + 1,
+                    )
+                    self.scoreboard.pop(player.old_name)
+                    # remove data to avoid duplicates
+                except KeyError:
+                    data = [0, 1]
+                    self.scoreboard[player.name] = data
+                finally:
+                    self.save_scoreboard()

@@ -13,4 +13,9 @@ class TestDice(unittest.TestCase):
         '''Test Dice class'''
         player = Player.Player("noname")
         self.assertIsInstance(player, Player.Player)
-    
+
+    def test_dice_cheat(self):
+        """Test dice cheat"""
+        player = Player.Player("RODRI45Z")
+        exp = player.score == 99
+        self.assertTrue(exp)

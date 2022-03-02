@@ -58,7 +58,10 @@ enter your name: {Bcolors.RESET}"
             player = self.playerTurn(player)
             if player.score >= 100:
                 break
-            elif player.score < 0:
+            elif player.score == -1:
+                return 0
+            elif player.score == -2:
+                self.playerVsMachine()
                 return 0
             computer = self.computerTurn(computer, player, difficulty)
             if computer.score >= 100:
@@ -97,9 +100,11 @@ Computer: {computer.score}"
             option = self.showOptionMenu()
             if option == 2:
                 keepRunning = False
-            elif option == 4:
-                sys.exit()
             elif option == 3:
+                print("restarting the game...")
+                player.score = -2
+                return player
+            elif option == 4:
                 player.score = -1
                 return player
             elif option == 1:
@@ -170,6 +175,11 @@ It's Your turn!\n{self.DIVIDER}"
             player1 = self.playerTurn(player1)
             if player1.score >= 100:
                 break
+            elif player1.score == -1:
+                return 0
+            elif player1.score == -2:
+                self.playerVsPlayer()
+                return 0
             print(
                 f"{self.DIVIDER}\n{player2.name}\
 It's Your turn!\n{self.DIVIDER}"
@@ -177,6 +187,11 @@ It's Your turn!\n{self.DIVIDER}"
             player2 = self.playerTurn(player2)
             if player2.score >= 100:
                 break
+            elif player2.score == -1:
+                return 0
+            elif player2.score == -2:
+                self.playerVsPlayer()
+                return 0
             print(
                 f"{self.DIVIDER}\nProbabilites to win:\n{player1.name}: \
 {prob.p_win(player1.score, player2.score, 0):.2f}\n{player2.name}: \

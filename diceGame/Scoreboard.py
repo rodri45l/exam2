@@ -4,6 +4,8 @@ import Bcolors as B
 
 class Scoreboard:
     def __init__(self):
+        """Constructor which creats the property scoreboard with a value taken from the file scoreboard.pickle
+        """
         try:
             with open("./diceGame/scoreboard.pickle", "rb") as handle:
                 sb = pickle.load(handle)
@@ -14,6 +16,7 @@ class Scoreboard:
             self.scoreboard = sb
 
     def print_scorebard(self):
+        """Prints the scoreboard"""
         print("Scoreboard")
         print(
             "##############################################################\
@@ -26,12 +29,12 @@ played: {item[1]} Winrate: {(item[0]/item[1])*100}%"
             )
 
     def save_scoreboard(self):
+        """Update the scoreboard in binary format"""
         with open("./diceGame/scoreboard.pickle", "wb") as handle:
             pickle.dump(self.scoreboard, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     def update_player(self, player):
-        """updates player to scoreboard,\
-if there is no coincidence it creates a new player"""
+        """Updates player's score and if there are no errors it creates a new player"""
         if player.won:
             try:
                 """Scoreboard a dictionary key name.

@@ -1,13 +1,11 @@
-from tkinter import E
 
-from click import option
 from Bcolors import Bcolors
 import should_roll as prob
 from Player import Player
 from Scoreboard import Scoreboard
 from Dice import Dice
 from random import randint
-
+import sys
 
 class Game:
     """Game class with methods for the game"""
@@ -22,16 +20,13 @@ class Game:
         try:
             print("Enter 1 to roll the dice")
             print("Enter 2 to hold your score")
+            print("Enter 3 to exit")
             option2 = int(input(f"Enter your choice: {Bcolors.RESET}"))
         except ValueError:
             print('Invalid option')
             return self.showOptionMenu()
 
         return option2
-        option3 = Game.showOptionMenu
-        return option3
-        option4 = sys.exit()
-        return option4
 
     def createPlayer(self, n):
         """Creating player"""
@@ -99,6 +94,8 @@ Computer: {computer.score}"
             option = self.showOptionMenu()
             if option == 2:
                 keepRunning = False
+            elif option == 3:
+                sys.exit()
             elif option == 1:
                 x.roll_dice(True)
 

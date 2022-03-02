@@ -28,6 +28,10 @@ class Game:
             return self.showOptionMenu()
 
         return option2
+        option3 = Game.showOptionMenu
+        return option3
+        option4 = sys.exit()
+        return option4
 
     def createPlayer(self, n):
         """Creating player"""

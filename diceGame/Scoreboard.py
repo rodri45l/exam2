@@ -4,7 +4,7 @@ from Bcolors import Bcolors
 
 class Scoreboard:
     def __init__(self):
-        """Constructor which ...
+        """Constructor which creats the property scoreboard with a value taken from the file scoreboard.pickle
         """
         try:
             with open("./diceGame/scoreboard.pickle", "rb") as handle:

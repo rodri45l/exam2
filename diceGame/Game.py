@@ -5,7 +5,7 @@ from Player import Player
 from Scoreboard import Scoreboard
 from Dice import Dice
 from random import randint
-import sys
+
 
 class Game:
     """Game class with methods for the game"""

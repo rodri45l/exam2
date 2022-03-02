@@ -58,6 +58,8 @@ enter your name: {Bcolors.RESET}"
             player = self.playerTurn(player)
             if player.score >= 100:
                 break
+            elif player.score < 0:
+                return 0
             computer = self.computerTurn(computer, player, difficulty)
             if computer.score >= 100:
                 break
@@ -98,7 +100,8 @@ Computer: {computer.score}"
             elif option == 4:
                 sys.exit()
             elif option == 3:
-                return 0
+                player.score = -1
+                return player
             elif option == 1:
                 x.roll_dice(True)
 

@@ -20,7 +20,7 @@ class Game:
         try:
             print("Enter 1 to roll the dice")
             print("Enter 2 to hold your score")
-            print("Enter 3 to exit")
+            print("Enter 3 to restart")
             option2 = int(input(f"Enter your choice: {Bcolors.RESET}"))
         except ValueError:
             print('Invalid option')
@@ -96,6 +96,8 @@ Computer: {computer.score}"
                 keepRunning = False
             elif option == 3:
                 sys.exit()
+            elif option == 4:
+                return 0 
             elif option == 1:
                 x.roll_dice(True)
 

@@ -96,7 +96,7 @@ enter your name: {Bcolors.RESET}"
             print(f"{self.DIVIDER}")
             player.won = True
         elif computer.score >= self.GOAL:
-            print(f"{Bcolors.FAIL}You lose, computers > humans")
+            print(f"{Bcolors.FAIL}You lose, Computers > Humans")
             print(
                 f"Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}"
@@ -164,14 +164,14 @@ Computer: {computer.score}"
             dice.roll_dice(False)
             if dice.roll == 1:
                 computer.turn_score = 0
-                print(f"Computer score this turn is {computer.score}")
-                print(f"Computer Total score is {computer.score}")
+                print(f"Computer Score this turn is {computer.score}")
+                print(f"Computer Total Score is {computer.score}")
                 return computer
             else:
                 computer.turn_score += dice.roll
-        print(f"Computer score this turn is {computer.turn_score}")
+        print(f"Computer Score this turn is {computer.turn_score}")
         computer.sum_turn_score()
-        print(f"Computer Total score is {computer.score}")
+        print(f"Computer Total Score is {computer.score}")
         return computer
 
     def playerVsPlayer(self):

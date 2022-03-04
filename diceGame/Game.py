@@ -1,10 +1,12 @@
 
+from ast import Try
 from Bcolors import Bcolors
 import should_roll as prob
 from Player import Player
 from Scoreboard import Scoreboard
 from Dice import Dice
 from random import randint
+
 
 
 class Game:
@@ -41,12 +43,20 @@ enter your name: {Bcolors.RESET}"
         return player
 
     def set_difficulty(self):
-        """returns the difficulty mode"""
-        difficulty = 0
-        while difficulty not in [1, 2]:
+        """Returns the difficulty mode"""    
+
+        repeat = True
+        while repeat:
             print("\n1. Easy mode\n2. Hard mode.")
-            difficulty = int(input("Please enter the difficulty: "))
-        return difficulty
+            difficulty = input("Enter the difficulty: ")
+
+            if difficulty != "1" and difficulty != "2":
+                print(f"\n{Bcolors.FAIL}Please press 1 or 2 (you pressed: {difficulty}){Bcolors.RESET}")
+            else: 
+                repeat = False
+        return int(difficulty)
+        
+        
 
     def playerVsMachine(self):
         """Player will compete with computer -

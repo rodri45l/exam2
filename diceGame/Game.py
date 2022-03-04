@@ -17,20 +17,23 @@ class Game:
         self.DIVIDER = "===================================================================\
 ======================================="
 
-    def showOptionMenu(self):
+    def showOptionMenu(self, name):
         """Printing a menu with option of playing or not for the turn"""
         try:
-            print("1 to roll the dice")
+            print(f"{Bcolors.HEADER}{self.DIVIDER}\n\
+{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}"
+            )
+            print("\n1 to roll the dice")
             print("2 to hold your score")
             print("3 to change your name")
             print("4 to restart")
             print("5 to exit the game")
-            option2 = int(input(f"Enter your choice: {Bcolors.RESET}"))
+            option = int(input(f"Enter your choice: {Bcolors.RESET}"))
         except ValueError:
-            print('Invalid option')
-            return self.showOptionMenu()
+            print(f'\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}')
+            return self.showOptionMenu(name)
 
-        return option2
+        return option
 
     def createPlayer(self, n):
         """Creating player"""
@@ -55,8 +58,7 @@ enter your name: {Bcolors.RESET}"
             else: 
                 repeat = False
         return int(difficulty)
-        
-        
+     
 
     def playerVsMachine(self):
         """Player will compete with computer -
@@ -103,12 +105,8 @@ Computer: {computer.score}"
         option = 0
         keepRunning = True
         x = Dice()
-        while keepRunning:
-            print(
-                f"{Bcolors.HEADER}{self.DIVIDER}\n\
-{Bcolors.UNDERLINE}Please {player.name} enter:{Bcolors.NOT_UNDERLINED}"
-            )
-            option = self.showOptionMenu()
+        while keepRunning:            
+            option = self.showOptionMenu(player.name)
             if option == 2:
                 keepRunning = False
             elif option == 4:

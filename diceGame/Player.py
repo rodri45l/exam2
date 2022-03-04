@@ -22,5 +22,5 @@ class Player:
         self.turn_score = 0
 
     def change_name(self, name):
-        """changes the player name"""
+        """Changes the player name"""
         self.name = name

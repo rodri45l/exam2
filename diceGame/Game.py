@@ -141,8 +141,7 @@ Computer: {computer.score}"
                     print(
                         f"{Bcolors.OKBLUE}Your score for this turn is:\
     {player.turn_score}"
-                    )
-            
+                    )            
         print(f"{Bcolors.OKBLUE}Your score this turn is {player.turn_score}")
         player.sum_turn_score()
         print(f"{player.name}'s Total score this turn is {player.score}")

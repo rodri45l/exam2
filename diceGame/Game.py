@@ -18,11 +18,11 @@ class Game:
     def showOptionMenu(self):
         """Printing a menu with option of playing or not for the turn"""
         try:
-            print("Enter 1 to roll the dice")
-            print("Enter 2 to hold your score")
-            print("Enter 3 to change your name")
-            print("Enter 4 to restart")
-            print("Enter 5 to exit the game")
+            print("1 to roll the dice")
+            print("2 to hold your score")
+            print("3 to change your name")
+            print("4 to restart")
+            print("5 to exit the game")
             option2 = int(input(f"Enter your choice: {Bcolors.RESET}"))
         except ValueError:
             print('Invalid option')
@@ -34,7 +34,7 @@ class Game:
         """Creating player"""
         player = Player(
             input(
-                f"{Bcolors.OKCYAN}Please Player{n} \
+                f"\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}"
             )
         )
@@ -44,7 +44,7 @@ enter your name: {Bcolors.RESET}"
         """returns the difficulty mode"""
         difficulty = 0
         while difficulty not in [1, 2]:
-            print("1. Easy mode\n2. Hard mode.")
+            print("\n1. Easy mode\n2. Hard mode.")
             difficulty = int(input("Please enter the difficulty: "))
         return difficulty
 
@@ -96,13 +96,13 @@ Computer: {computer.score}"
         while keepRunning:
             print(
                 f"{Bcolors.HEADER}{self.DIVIDER}\n\
-{Bcolors.UNDERLINE}Please {player.name} choose:{Bcolors.NOT_UNDERLINED}"
+{Bcolors.UNDERLINE}Please {player.name} enter:{Bcolors.NOT_UNDERLINED}"
             )
             option = self.showOptionMenu()
             if option == 2:
                 keepRunning = False
             elif option == 4:
-                print("restarting the game...")
+                print("Restarting the game...")
                 player.score = -2
                 return player
             elif option == 5:

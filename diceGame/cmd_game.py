@@ -11,17 +11,20 @@ class PigGame(cmd.Cmd):
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
 {LetCol.HEADER}{DIVIDER}"
 
-    prompt = f"{LetCol.WARNING}(Pig Game) "
+    prompt = f'\nAll commands: \n|  play  |  rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command: '
 
     def do_play(self, arg):
         "Enter 1 to play vs the computer, 2 for 2 player game."
+        print(f'{LetCol.RESET}\nLet’s play!\n\n1. One player game\n2. Two player game')
+        game_type = input(f"Choose a game:")
+
         game = Game()
-        if arg == "1":
+        if game_type == "1":
             game.playerVsMachine()
-        elif arg == "2":
+        elif game_type == "2":
             game.playerVsPlayer()
         else:
-            print(f"please press 1 or 2 (you pressed: {arg})")
+            print(f"Please press 1 or 2 (you pressed: {game_type})")
 
     def do_scoreboard(self, arg):
         'Prints Scoreboard'
@@ -30,7 +33,7 @@ class PigGame(cmd.Cmd):
 
     def do_bye(self, arg):
         "close the game."
-        print("Thank you for playing. bye!!")
+        print("Thank you for playing. Bye!!")
         return True
 
     def do_rules(self, arg):

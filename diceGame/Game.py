@@ -29,7 +29,8 @@ class Game:
             print("4 to restart")
             print("5 to exit the game")
             option = int(input(f"Enter your choice: {Bcolors.RESET}"))
-            if option not in range(1, 6): raise ValueError('Problem!')
+            if option not in range(1, 6):
+                raise ValueError('Problem!')
         except ValueError:
             print(f'\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}')
             return self.showOptionMenu(name)

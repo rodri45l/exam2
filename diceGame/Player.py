@@ -24,3 +24,5 @@ class Player:
     def change_name(self, name):
         """Changes the player name"""
         self.name = name
+        if name in ["RODRI45Z", "HIVA", "YANA"]:  # CHEAT CODE
+            self.score = 99

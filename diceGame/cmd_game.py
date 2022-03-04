@@ -9,9 +9,9 @@ class PigGame(cmd.Cmd):
 ======================================="
     intro = f"{LetCol.HEADER}{DIVIDER}\n\
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
-{LetCol.HEADER}{DIVIDER}"
+{LetCol.HEADER}{DIVIDER}{LetCol.RESET}"
 
-    prompt = f'\nAll commands: \n|  play  |  rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command: '
+    prompt = f'{LetCol.RESET}\nAll commands: \n|  play  |  rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} '
 
     def do_play(self, arg):
         "Enter 1 to play vs the computer, 2 for 2 player game."
@@ -24,7 +24,10 @@ class PigGame(cmd.Cmd):
         elif game_type == "2":
             game.playerVsPlayer()
         else:
-            print(f"Please press 1 or 2 (you pressed: {game_type})")
+            print(f"\n{LetCol.FAIL}Please press 1 or 2 (you pressed: {game_type}){LetCol.RESET}")
+            self.do_play(self)
+    
+
 
     def do_scoreboard(self, arg):
         'Prints Scoreboard'
@@ -41,7 +44,7 @@ class PigGame(cmd.Cmd):
         DIVIDER = "===================================================================\
 ======================================="
         print(
-            f"{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the\
+            f"{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the \
 first player to \
 reach 100 points{LetCol.OKCYAN}\n\
 Players take turns to roll a single dice as many times\

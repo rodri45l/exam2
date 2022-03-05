@@ -15,17 +15,17 @@ class TestGame(unittest.TestCase):
         game = Game.Game()
         self.assertIsInstance(game, Game.Game)
     
-    @mock.patch("builtins.print")
-    def test_showOptionMenu(self, mock):
-        """Test show option menu """
-        game = Game.Game()
-        game.Game("7")
-        str = "Enter your choice: 7"
-        mock.assert_called_with(str)
+    # @mock.patch("builtins.print")
+    # def test_showOptionMenu(self, mock):
+    #     """Test show option menu """
+    #     game = Game.Game()
+    #     game.Game("7")
+    #     str = "Enter your choice: 7"
+    #     mock.assert_called_with(str)
 
-    def test_createPlayer(self):
-        """ Test creating player """
-        game = Game.Game()
-        game.Game("1")
-        str = "Please Player n \ enter your name: 1 "
-        mock.assert_called_with(str)
+    # def test_createPlayer(self):
+    #     """ Test creating player """
+    #     game = Game.Game()
+    #     game.Game("1")
+    #     str = "Please Player n \ enter your name: 1 "
+    #     mock.assert_called_with(str)

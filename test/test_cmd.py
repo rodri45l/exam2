@@ -48,7 +48,7 @@ class TestCmd(unittest.TestCase):
         """ Test if print function as required """
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_rules("")
-        str = "LetCol.HEADERDIVIDERLetCol.OKCYAN\ nIn this game wins the "
+        str = '\x1b[95m==========================================================================================================\x1b[96m\nIn this game wins the first player to reach 100 points\x1b[96m\nPlayers take turns to roll a single dice as many times as they wish,    \nadding all roll results to a running total, but losing their gained score for the turn if they roll a 1.\n\x1b[95m=========================================================================================================='
         mock.assert_called_with(str)
 
 

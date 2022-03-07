@@ -27,7 +27,15 @@ class TestDice(unittest.TestCase):
         self.assertTrue(exp)
 
     def test_change_name(self):
+        """Test if we change the name with a new one"""
         player = Player.Player("RODRI45Z")
         player.change_name("Pete")
         exp = player.name == "Pete"
+        self.assertTrue(exp)
+
+    def test_change_name_cheater(self):
+        """Test if the score changes if a cheater name is given"""
+        player = Player.Player("Pipi")
+        player.change_name("HIVA")
+        exp = player.score == 99
         self.assertTrue(exp)

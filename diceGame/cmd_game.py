@@ -25,8 +25,7 @@ class PigGame(cmd.Cmd):
             game.playerVsPlayer()
         else:
             print(f"\n{LetCol.FAIL}Please press 1 or 2 (you pressed: {game_type}){LetCol.RESET}")
-            self.do_play(self)
-    
+            self.do_play(self)  
 
 
     def do_scoreboard(self, arg):

@@ -17,17 +17,14 @@ class Scoreboard:
 
     def print_scorebard(self):
         """Prints the scoreboard"""
-        print("Scoreboard")
-        print(
-            "##############################################################\
+        str="Scoreboard\n\
+##############################################################\
 ############################################"
-        )
         for key, item in self.scoreboard.items():
             wr = item[0]/item[1]
-            print(
-                f"{B.Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches\
+            str += f"\n{B.Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches\
 played: {item[1]} Winrate: {(wr*100):.2f}%"
-            )
+        print(str)
 
     def save_scoreboard(self):
         """Update the scoreboard in binary format"""

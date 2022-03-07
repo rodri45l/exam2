@@ -45,6 +45,7 @@ class TestCmd(unittest.TestCase):
         self.assertTrue(mock.called)
     
     def test_do_bye(self):
+        "test do bye function"
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         exp = cmd_g.do_bye("")
         self.assertTrue(exp)

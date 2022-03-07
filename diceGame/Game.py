@@ -20,15 +20,14 @@ class Game:
     def showOptionMenu(self, name):
         """Printing a menu with option of playing or not for the turn"""
         try:
-            print(f"{Bcolors.HEADER}{self.DIVIDER}\n\
-{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}"
-            )
-            print("\n1 to roll the dice")
-            print("2 to hold your score")
-            print("3 to change your name")
-            print("4 to restart")
-            print("5 to exit the game")
-            option = int(input(f"Enter your choice: {Bcolors.RESET}"))
+            option = int(input(f"{Bcolors.HEADER}{self.DIVIDER}\n\
+{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
+1 to roll the dice\n\
+2 to hold your score\n\
+3 to change your name\n\
+4 to restart\n\
+5 to exit the game\n\
+Enter your choice: {Bcolors.RESET}"))
             if option not in range(1, 6):
                 raise ValueError('Problem!')
         except ValueError:

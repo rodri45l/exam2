@@ -8,12 +8,12 @@ import unittest
 class TestDice(unittest.TestCase):
     """Dice testing class"""
 
-    def test_Dice(self):
+    def test_Player(self):
         '''Test Dice class'''
         player = Player.Player("noname")
         self.assertIsInstance(player, Player.Player)
 
-    def test_dice_cheat(self):
+    def test_player_cheat(self):
         """Test dice cheat"""
         player = Player.Player("RODRI45Z")
         exp = player.score == 99

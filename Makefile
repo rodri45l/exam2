@@ -150,3 +150,9 @@ metrics: radon-cc radon-mi radon-raw radon-hal
 #
 bandit:
 	bandit -r .
+
+# ---------------------------------------------------------
+# Start the game.
+#
+play:
+	$(PYTHON) diceGame/cmd_game.py

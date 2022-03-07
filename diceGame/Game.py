@@ -47,27 +47,24 @@ enter your name: {Bcolors.RESET}"
         )
         return player
 
-    def set_difficulty(self):
-        """Returns the difficulty mode"""    
+    # def set_difficulty(self):
+    #     """Returns the difficulty mode"""    
 
-        repeat = True
-        while repeat:
-            print("\n1. Easy mode\n2. Hard mode.")
-            difficulty = input("Enter the difficulty: ")
+    #     repeat = True
+    #     while repeat:
+    #         print("\n1. Easy mode\n2. Hard mode.")
+    #         difficulty = input("Enter the difficulty: ")
 
-            if difficulty != "1" and difficulty != "2":
-                print(f"\n{Bcolors.FAIL}Please press 1 or 2 (you pressed: {difficulty}){Bcolors.RESET}")
-            else: 
-                repeat = False
-        return int(difficulty)
-     
-
-    def playerVsMachine(self):
+    #         if difficulty != "1" and difficulty != "2":
+    #             print(f"\n{Bcolors.FAIL}Please press 1 or 2 (you pressed: {difficulty}){Bcolors.RESET}")
+    #         else: 
+    #             repeat = False
+    #     return int(difficulty)
+    def playerVsMachine(self, difficulty):
         """Player will compete with computer -
         both will play and winner will be displayed
         """
         player = self.createPlayer(1)
-        difficulty = self.set_difficulty()
         computer = Player("Computer")
 
         while player.score < 100 and computer.score < 100:

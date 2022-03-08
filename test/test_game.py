@@ -1,6 +1,5 @@
 """Dice Unittest"""
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from diceGame import Game
 import unittest
 from unittest.mock import patch
@@ -23,7 +22,7 @@ class TestGame(unittest.TestCase):
         exp = player.name == "Rodri"
         self.assertTrue(exp)
     
-    @patch('builtins.input', return_value="Rodri2")
+    @patch('builtins.input', return_value = "Rodri2")
     def test_change_name(self, mock_input):
         player = Player("Rodri")
         game = Game.Game()
@@ -32,7 +31,7 @@ class TestGame(unittest.TestCase):
 
 
     
-    @patch("builtins.input", return_value="1")
+    @patch("builtins.input", return_value = "1")
     def test_showOptionMenu(self, mock_input):
         """Test show option menu """
         game = Game.Game()
@@ -64,12 +63,12 @@ Enter your choice: {Bcolors.RESET}"
         mock_input.assert_called_with(str)
         self.assertEqual(num, 1)
 
-    @patch("builtins.input", side_effect=["RODRI45Z","1","2"])
+
+    @patch('builtins.input', side_effect = ["hiva", "5"])
     def test_playerVsMachine(self, mock_input):
         game = Game.Game()
-        game.playerVsMachine(1)
+        exp= game.playerVsMachine(2) 
+        self.assertEqual(exp,0)
 
-    @patch("builtins.input", side_effect=["RODRI45Z", "4", "RODRI45Z", "1", "2"])
-    def test_playerVsMachine2(self, mock_input):
-        game = Game.Game()
-        game.playerVsMachine(1)
+   
+       

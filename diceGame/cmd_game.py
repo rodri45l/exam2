@@ -31,7 +31,7 @@ rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCo
 
     def do_scoreboard(self, arg):
         'Prints Scoreboard'
-        scoreboard = Scoreboard()
+        scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard.print_scorebard()
 
     def do_bye(self, arg):

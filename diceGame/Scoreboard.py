@@ -1,13 +1,14 @@
 import pickle
 import Bcolors as B
-
+# "./diceGame/scoreboard.pickle"
 
 class Scoreboard:
-    def __init__(self):
+    def __init__(self, path):
         """Constructor which creates the property scoreboard with a value taken from the file scoreboard.pickle
         """
+        self.path = path
         try:
-            with open("./diceGame/scoreboard.pickle", "rb") as handle:
+            with open(path, "rb") as handle:
                 sb = pickle.load(handle)
         except FileNotFoundError:
             print("No scoreboard found, creating a new one")
@@ -28,7 +29,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
 
     def save_scoreboard(self):
         """Update the scoreboard in binary format"""
-        with open("./diceGame/scoreboard.pickle", "wb") as handle:
+        with open(self.path, "wb") as handle:
             pickle.dump(self.scoreboard, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     def update_player(self, player):

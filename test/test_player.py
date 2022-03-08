@@ -37,5 +37,4 @@ class TestDice(unittest.TestCase):
         """Test if the score changes if a cheater name is given"""
         player = Player.Player("Pipi")
         player.change_name("HIVA")
-        exp = player.score == 99
-        self.assertTrue(exp)
+        self.assertEqual(player.score, 99)

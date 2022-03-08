@@ -14,3 +14,9 @@ class TestScoreboard(unittest.TestCase):
         scoreboard = Scoreboard.Scoreboard()
         self.assertIsInstance(scoreboard, Scoreboard.Scoreboard)
     
+    def test_init(self):
+        with self.assertRaises(FileNotFoundError):
+            pass
+    
+    def test_print_scorebard(self):
+        pass

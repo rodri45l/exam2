@@ -11,22 +11,23 @@ class PigGame(cmd.Cmd):
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
 {LetCol.HEADER}{DIVIDER}{LetCol.RESET}"
 
-    prompt = f'{LetCol.RESET}\nAll commands: \n|  play  |  rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} '
+    prompt = f'{LetCol.RESET}\nAll commands: \n|  play | play2 |\
+rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} '
 
     def do_play(self, arg):
-        "Enter 1 to play vs the computer, 2 for 2 player game."
-        print(f'{LetCol.RESET}\nLet’s play!\n\n1. One player game\n2. Two player game')
-        game_type = input(f"Choose a game:")
-
+        "Play versus computer, enter hard or easy as an argument after 'play'."
         game = Game()
-        if game_type == "1":
-            game.playerVsMachine()
-        elif game_type == "2":
-            game.playerVsPlayer()
+        if arg == "hard":
+            game.playerVsMachine(2)
+        elif arg == "easy":
+            game.playerVsMachine(1)
         else:
-            print(f"\n{LetCol.FAIL}Please press 1 or 2 (you pressed: {game_type}){LetCol.RESET}")
-            self.do_play(self)  
+            print("Wrong argument, type easy or hard after 'play'.")
 
+    def do_play2(self, arg):
+        "2 player game."
+        game = Game()
+        game.playerVsPlayer()
 
     def do_scoreboard(self, arg):
         'Prints Scoreboard'

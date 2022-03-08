@@ -20,15 +20,14 @@ class Game:
     def showOptionMenu(self, name):
         """Printing a menu with option of playing or not for the turn"""
         try:
-            print(f"{Bcolors.HEADER}{self.DIVIDER}\n\
-{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}"
-            )
-            print("\n1 to roll the dice")
-            print("2 to hold your score")
-            print("3 to change your name")
-            print("4 to restart")
-            print("5 to exit the game")
-            option = int(input(f"Enter your choice: {Bcolors.RESET}"))
+            option = int(input(f"{Bcolors.HEADER}{self.DIVIDER}\n\
+{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
+1 to roll the dice\n\
+2 to hold your score\n\
+3 to change your name\n\
+4 to restart\n\
+5 to exit the game\n\
+Enter your choice: {Bcolors.RESET}"))
             if option not in range(1, 6):
                 raise ValueError('Problem!')
         except ValueError:
@@ -47,27 +46,11 @@ enter your name: {Bcolors.RESET}"
         )
         return player
 
-    def set_difficulty(self):
-        """Returns the difficulty mode"""    
-
-        repeat = True
-        while repeat:
-            print("\n1. Easy mode\n2. Hard mode.")
-            difficulty = input("Enter the difficulty: ")
-
-            if difficulty != "1" and difficulty != "2":
-                print(f"\n{Bcolors.FAIL}Please press 1 or 2 (you pressed: {difficulty}){Bcolors.RESET}")
-            else: 
-                repeat = False
-        return int(difficulty)
-     
-
-    def playerVsMachine(self):
+    def playerVsMachine(self, difficulty):
         """Player will compete with computer -
         both will play and winner will be displayed
         """
         player = self.createPlayer(1)
-        difficulty = self.set_difficulty()
         computer = Player("Computer")
 
         while player.score < 100 and computer.score < 100:

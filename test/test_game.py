@@ -71,4 +71,10 @@ Enter your choice: {Bcolors.RESET}"
         self.assertEqual(exp,0)
 
    
-       
+      @patch('builtins.input', return_value = player)
+    def test_playerTurn(self, mock_input):
+        game = Game.Game()
+        exp = game.playerTurn(4)
+        str = "Restarting the game..."
+        mock_input.assert_called_with(str)
+        self.assertTrue(exp, player) 

@@ -60,7 +60,7 @@ enter your name: {Bcolors.RESET}"
             elif player.score == -1:
                 return 0
             elif player.score == -2:
-                self.playerVsMachine()
+                self.playerVsMachine(difficulty)
                 return 0
 
             computer = self.computerTurn(computer, player, difficulty)
@@ -84,7 +84,7 @@ enter your name: {Bcolors.RESET}"
                 f"Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}"
             )
-        scoreboard = Scoreboard()
+        scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard.update_player(player)
 
     def playerTurn(self, player):
@@ -125,7 +125,7 @@ Computer: {computer.score}"
                     print(
                         f"{Bcolors.OKBLUE}Your score for this turn is:\
     {player.turn_score}"
-                    )            
+                    )           
         print(f"{Bcolors.OKBLUE}Your score this turn is {player.turn_score}")
         player.sum_turn_score()
         print(f"{player.name}'s Total score this turn is {player.score}")
@@ -208,7 +208,7 @@ It's Your turn!\n{self.DIVIDER}"
             f"Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}"
         )
-        scoreboard = Scoreboard()
+        scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard.update_player(player1)
         scoreboard.update_player(player2)
 

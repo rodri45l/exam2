@@ -16,13 +16,13 @@ class TestScoreboard(unittest.TestCase):
 
     def test_scoreboard(self):
         '''Test Scoreboard class'''
-        scoreboard = Scoreboard.Scoreboard()
+        scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         self.assertIsInstance(scoreboard, Scoreboard.Scoreboard)
 
     @patch("builtins.print")
     def test_print_scoreboard(self, mock):
         """Test print_scoreboard func"""
-        scoreboard = Scoreboard.Scoreboard()
+        scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         sb = scoreboard.scoreboard
         str="Scoreboard\n\
 ##############################################################\
@@ -38,7 +38,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         """Test save_scoreboard func"""
         player = Player.Player("Test")
         player.Won = True
-        scoreboard = Scoreboard.Scoreboard()
+        scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard.update_player(player)
         sb = scoreboard.scoreboard
         scoreboard.save_scoreboard()

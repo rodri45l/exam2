@@ -1,24 +1,24 @@
-
-from ast import Try
+"""Game module containing functions for the pig game."""
+from random import randint
 from Bcolors import Bcolors
 import should_roll as prob
 from Player import Player
 from Scoreboard import Scoreboard
 from Dice import Dice
-from random import randint
 
 
 
 class Game:
-    """Game class with methods for the game"""
+    """Game class with methods for the game."""
 
     def __init__(self):
+        """Class constructor with GOAL and Divider as attributes."""
         self.GOAL = 100
         self.DIVIDER = "===================================================================\
 ======================================="
 
     def showOptionMenu(self, name):
-        """Printing a menu with option of playing or not for the turn"""
+        """Print a menu with options."""
         try:
             option = int(input(f"{Bcolors.HEADER}{self.DIVIDER}\n\
 {Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
@@ -37,7 +37,7 @@ Enter your choice: {Bcolors.RESET}"))
         return option
 
     def createPlayer(self, n):
-        """Creating player"""
+        """Create player."""
         player = Player(
             input(
                 f"\n{Bcolors.OKCYAN}Please Player {n} \
@@ -47,9 +47,8 @@ enter your name: {Bcolors.RESET}"
         return player
 
     def playerVsMachine(self, difficulty):
-        """Player will compete with computer -
-        both will play and winner will be displayed
-        """
+        """Player vs machine game."""
+
         player = self.createPlayer(1)
         computer = Player("Computer")
         if player.name == "test":
@@ -92,12 +91,13 @@ Computer: {computer.score}"
             scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
             scoreboard.update_player(player)
             return 2
+
     def playerTurn(self, player):
-        """it is Player turn - role the dice and get the score and total score for this turn"""
+        """Player turn."""
         option = 0
         keepRunning = True
         x = Dice()
-        while keepRunning:            
+        while keepRunning:
             option = self.showOptionMenu(player.name)
             if option == 2:
                 keepRunning = False
@@ -111,7 +111,6 @@ Computer: {computer.score}"
                 return player
             elif option == 3:
                 self.change_name(player)
-                pass
             elif option == 1:
                 x.roll_dice(True)
 
@@ -130,7 +129,7 @@ Computer: {computer.score}"
                     print(
                         f"{Bcolors.OKBLUE}Your score for this turn is:\
     {player.turn_score}"
-                    )           
+                    )
         print(f"{Bcolors.OKBLUE}Your score this turn is {player.turn_score}")
         player.sum_turn_score()
         print(f"{player.name}'s Total score this turn is {player.score}")
@@ -138,7 +137,7 @@ Computer: {computer.score}"
         return player
 
     def computerTurn(self, computer, player, difficulty):
-        """Computer turn - role the dice and get the score and total score for this turn"""
+        """Play as computer."""
         dice = Dice()
         while prob.should_roll(computer.score, player.score, computer.turn_score):
             if difficulty == 1:
@@ -163,7 +162,7 @@ Computer: {computer.score}"
         return computer
 
     def playerVsPlayer(self):
-        """Two players playing - both will play and one would win and one would lose"""
+        """Two players playing - both will play and one would win and one would lose."""
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while player1.score < 100 and player2.score < 100:
@@ -218,5 +217,6 @@ It's Your turn!\n{self.DIVIDER}"
         scoreboard.update_player(player2)
 
     def change_name(self, player):
+        """Change your name."""
         new_name = input('Enter new name: ')
         player.change_name(new_name)

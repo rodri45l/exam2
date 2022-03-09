@@ -16,12 +16,11 @@ class TestDice(unittest.TestCase):
     def test_player_cheat(self):
         """Test dice cheat"""
         player = Player.Player("RODRI45Z")
-        exp = player.score == 99
+        exp = player.turn_score == 100
         self.assertTrue(exp)
 
     def test_sum_turnscore(self):
         player = Player.Player("RODRI45Z")
-        player.turn_score = 1
         player.sum_turn_score()
         exp = player.score == 100
         self.assertTrue(exp)
@@ -36,4 +35,4 @@ class TestDice(unittest.TestCase):
         """Test if the score changes if a cheater name is given"""
         player = Player.Player("Pipi")
         player.change_name("HIVA")
-        self.assertEqual(player.score, 99)
+        self.assertEqual(player.turn_score, 100)

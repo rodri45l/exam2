@@ -3,7 +3,7 @@
 # Change this to be your variant of the python command
 # Set the env variable PYTHON to another value if needed
 # PYTHON=python3 make version
-PYTHON ?= py # python3 py
+PYTHON ?= python3 # python3 py
 
 # Print out colored action message
 # MESSAGE = printf "\033[32;01m---> $(1)\033[0m\n"
@@ -62,11 +62,11 @@ clean-all: clean clean-doc
 #
 pylint:
 	@$(call MESSAGE,$@)
-	-cd diceGame && python -m pylint *.py
+	-cd diceGame && $(PYTHON) -m pylint *.py
 
 flake8:
 	@$(call MESSAGE,$@)
-	-cd diceGame && python -m flake8
+	-cd diceGame && $(PYTHON) -m flake8
 
 lint: flake8 pylint
 

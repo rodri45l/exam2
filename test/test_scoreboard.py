@@ -314,6 +314,3 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard_object.save_scoreboard()
 
 
-  
-
-

@@ -1,6 +1,5 @@
 """Dice Unittest"""
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from diceGame import Game
 import unittest
 from unittest.mock import patch
@@ -23,7 +22,7 @@ class TestGame(unittest.TestCase):
         exp = player.name == "Rodri"
         self.assertTrue(exp)
     
-    @patch('builtins.input', return_value="Rodri2")
+    @patch('builtins.input', return_value = "Rodri2")
     def test_change_name(self, mock_input):
         player = Player("Rodri")
         game = Game.Game()
@@ -32,7 +31,7 @@ class TestGame(unittest.TestCase):
 
 
     
-    @patch("builtins.input", return_value="1")
+    @patch("builtins.input", return_value = "1")
     def test_showOptionMenu(self, mock_input):
         """Test show option menu """
         game = Game.Game()
@@ -64,12 +63,51 @@ Enter your choice: {Bcolors.RESET}"
         mock_input.assert_called_with(str)
         self.assertEqual(num, 1)
 
-    @patch("builtins.input", side_effect=["RODRI45Z","1","2"])
-    def test_playerVsMachine(self, mock_input):
-        game = Game.Game()
-        game.playerVsMachine(1)
 
-    @patch("builtins.input", side_effect=["RODRI45Z", "4", "RODRI45Z", "1", "2"])
-    def test_playerVsMachine2(self, mock_input):
+    @patch('builtins.input', side_effect = ["Rodri45Z", "5"])
+    def test_playerVsMachine(self, mock_input):
+        """Test playervsMachine exit """
         game = Game.Game()
-        game.playerVsMachine(1)
+        exp= game.playerVsMachine(2) 
+        self.assertEqual(exp,0)
+
+    @patch("builtins.input", side_effect=["RODRI45Z", "4", "RODRI45Z", "2"])
+    def test_playerVsMachine2(self, mock_input):
+        """Test playervsMachine restart"""
+        game = Game.Game()
+        exp = game.playerVsMachine(1)
+        self.assertEqual(exp, 0)
+
+    @patch("builtins.input", side_effect=["RODRI45Z","2"])
+    def test_playerVsMachine3(self, mock_input):
+        """Test playervsMachine player win"""
+        game = Game.Game()
+        exp = game.playerVsMachine(1)
+        self.assertEqual(exp, 1)
+
+    @patch("builtins.input", side_effect=["RODRI45Z", "yana","2"])
+    def test_playerVsplayer(self, mock_input):
+        """Test playervsplayer player 1 win"""
+        game = Game.Game()
+        game.playerVsPlayer()
+
+    @patch("builtins.input", side_effect=["Rodri45Z", "YANA", "2", "2"])
+    def test_playerVsplayer2(self, mock_input):
+        """Test playervsplayer player 2 win"""
+        game = Game.Game()
+        game.playerVsPlayer()
+    
+    @patch("builtins.input", side_effect=["test"])
+    def test_playerVsMachine4(self, mock_input):
+        """Test playervsMachine computer wins"""
+        game = Game.Game()
+        exp = game.playerVsMachine(2)
+        self.assertEqual(exp, 2)
+    
+    def test_computerTurn(self):
+        "Test of computer turn difficulty hard"
+        game = Game.Game()
+        computer = Player("computer")
+        player = Player("Rodri")
+        exp = game.computerTurn(computer, player, 2)
+        self.assertIsInstance(exp, Player)

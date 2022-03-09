@@ -1,3 +1,4 @@
+"""Cmd module ussing cmd class for game loop."""
 import cmd
 from Game import Game
 from Scoreboard import Scoreboard

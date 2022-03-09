@@ -104,4 +104,10 @@ Enter your choice: {Bcolors.RESET}"
         exp = game.playerVsMachine(2)
         self.assertEqual(exp, 2)
     
-    
+    def test_computerTurn(self):
+        "Test of computer turn difficulty hard"
+        game = Game.Game()
+        computer = Player("computer")
+        player = Player("Rodri")
+        exp = game.computerTurn(computer, player, 2)
+        self.assertIsInstance(exp, Player)

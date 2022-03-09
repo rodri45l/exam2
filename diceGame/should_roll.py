@@ -2,9 +2,9 @@
 import pickle
 from collections import Counter
 
-"""Code made by rodri45z,
-using data from http://cs.gettysburg.edu/projects/pig/piggame.html
-and equations from http://cs.gettysburg.edu/~tneller/papers/pig.zip"""
+# Code made by rodri45z,
+# using data from http://cs.gettysburg.edu/projects/pig/piggame.html
+# and equations from http://cs.gettysburg.edu/~tneller/papers/pig.zip
 
 GOAL = 100
 

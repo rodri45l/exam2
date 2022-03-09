@@ -1,10 +1,11 @@
 """Dice Unittest"""
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from diceGame import Dice
 import unittest
 from unittest.mock import patch
 import pickle
+from diceGame import Dice
+
 
 class TestDice(unittest.TestCase):
     """Dice testing class"""
@@ -13,12 +14,12 @@ class TestDice(unittest.TestCase):
         '''Test Dice class'''
         die = Dice.Dice()
         self.assertIsInstance(die, Dice.Dice)
-    
+
     def test_roll_dice(self):
         """Test roll_dice method without printing"""
         die = Dice.Dice()
         die.roll_dice(False)
-        exp = 0 < die.roll < 7 
+        exp = 0 < die.roll < 7
         self.assertTrue(exp)
 
     @patch('builtins.print')
@@ -30,5 +31,3 @@ class TestDice(unittest.TestCase):
             dice_face_dic = pickle.load(handle)
         str = "\n" + dice_face_dic[die.roll] + "\n"
         mock_print.assert_called_with(str)
-
-

@@ -15,7 +15,6 @@ class Player:
         self.turn_score = 0
         if name in ["RODRI45Z", "HIVA", "YANA"]:  # CHEAT CODE
             self.turn_score = 100
-        
 
     def sum_turn_score(self):
         """Sums turn score to total score and sets score to 0"""

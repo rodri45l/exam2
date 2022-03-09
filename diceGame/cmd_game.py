@@ -6,6 +6,7 @@ from Bcolors import Bcolors as LetCol
 
 
 class PigGame(cmd.Cmd):
+    """PigGame cmd Class."""
     DIVIDER = "===================================================================\
 ======================================="
     intro = f"{LetCol.HEADER}{DIVIDER}\n\

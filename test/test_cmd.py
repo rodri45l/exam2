@@ -1,10 +1,10 @@
 """Dice Unittest"""
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from diceGame import cmd_game
 import unittest
 from unittest import mock
 import cmd
+from diceGame import cmd_game
 
 
 class TestCmd(unittest.TestCase):
@@ -28,7 +28,7 @@ class TestCmd(unittest.TestCase):
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_play("easy")
         self.assertTrue(mock.called)
-    
+
     @mock.patch("builtins.print")
     def test_do_play3(self, mock):
         """ Test if we pass an argument other thatn 1 or 2 """
@@ -36,14 +36,14 @@ class TestCmd(unittest.TestCase):
         cmd_g.do_play('3')
         str = "Wrong argument, type easy or hard after 'play'."
         mock.assert_called_with(str)
-    
+
     @mock.patch('Game.Game.playerVsPlayer')
     def test_do_play2(self, mock):
         """Test if do_play2 calls playerVsplayer func."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_play2("")
         self.assertTrue(mock.called)
-    
+
     def test_do_bye(self):
         "test do bye function"
         cmd_g = cmd_game.PigGame(cmd.Cmd)
@@ -52,6 +52,7 @@ class TestCmd(unittest.TestCase):
 
     @mock.patch("Scoreboard.Scoreboard.print_scorebard")
     def test_do_scoreboard(self, mock):
+        """Test print scoreboard."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_scoreboard("")
         self.assertTrue(mock.called)

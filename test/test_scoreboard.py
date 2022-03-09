@@ -1,12 +1,10 @@
 """Dice Unittest"""
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from telnetlib import SB
 from diceGame import Scoreboard
 from diceGame import Player
 import unittest
 from unittest.mock import patch
-from unittest import mock
 import pickle
 from diceGame import Bcolors as B
 
@@ -24,14 +22,14 @@ class TestScoreboard(unittest.TestCase):
         '''Test if we throw FileNotFoundError exception'''
         scoreboard = Scoreboard.Scoreboard("./wrong/scoreboardWrongName.pickle")
         str = "No scoreboard found, creating a new one"
-        mock.assert_called_with(str)           
+        mock.assert_called_with(str)
 
     @patch("builtins.print")
     def test_print_scoreboard(self, mock):
         """Test print_scoreboard func"""
         scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         sb = scoreboard.scoreboard
-        str="Scoreboard\n\
+        str = "Scoreboard\n\
 ##############################################################\
 ############################################"
         for key, item in sb.items():
@@ -40,7 +38,7 @@ class TestScoreboard(unittest.TestCase):
 played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard.print_scorebard()
         mock.assert_called_with(str)
-    
+
     def test_save_scoreboard(self):
         """Test save_scoreboard func"""
         player = Player.Player("Test")
@@ -48,7 +46,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard.update_player(player)
         sb = scoreboard.scoreboard
-        scoreboard.save_scoreboard()   
+        scoreboard.save_scoreboard()
 
         with open("./diceGame/scoreboard.pickle", "rb") as handle:
             sb2 = pickle.load(handle)
@@ -59,8 +57,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard.save_scoreboard()
 
     def test_update_player_1(self):
-        "Test name NOT changed, socre and games count saved correctly"             
-        
+        "Test name NOT changed, socre and games count saved correctly"  
         # Arrange: 
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard
@@ -115,7 +112,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
             scoreboard.pop(new_name)
             scoreboard_object.save_scoreboard()
 
-        #Player:
+        # Player:
         player = Player.Player(initial_name)
         player.won = True        
 
@@ -158,7 +155,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
             scoreboard.pop(new_name)
             scoreboard_object.save_scoreboard()
 
-        #Player:
+        # Player:
         player = Player.Player(initial_name)
         player.won = True        
 
@@ -194,7 +191,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
             scoreboard.pop(initial_name)
             scoreboard_object.save_scoreboard()
 
-        #Player:
+        # Player:
         player = Player.Player(initial_name)
         player.won = True
 
@@ -225,7 +222,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
             scoreboard.pop(initial_name)
             scoreboard_object.save_scoreboard()
 
-        #Player:
+        # Player:
         player = Player.Player(initial_name)
         player.won = False
 
@@ -261,7 +258,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
             scoreboard.pop(new_name)
             scoreboard_object.save_scoreboard()
 
-        #Player:
+        # Player:
         player = Player.Player(initial_name)
         player.won = True        
 
@@ -296,7 +293,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
             scoreboard.pop(new_name)
             scoreboard_object.save_scoreboard()
 
-        #Player:
+        # Player:
         player = Player.Player(initial_name)
         player.won = True        
 

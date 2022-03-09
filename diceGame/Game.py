@@ -7,7 +7,6 @@ from Scoreboard import Scoreboard
 from Dice import Dice
 
 
-
 class Game:
     """Game class with methods for the game."""
 

@@ -61,14 +61,8 @@ class TestCmd(unittest.TestCase):
         """ Test if print function as required """
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_rules("")
-        str = "\x1b[95m==========================================================================================================\x1b[96m\nIn this game wins the first player to reach 100 points\x1b[96m\nPlayers take turns to roll a single dice as many times as they wish,    \nadding all roll results to a running total, but losing their gained score for the turn if they roll a 1.\n\x1b[95m=========================================================================================================="
+        str = "\x1b[95m=====================================================\
+=====================================================\x1b[96m\nIn this game wins the first player to reach 100 points\x1b[96m\nPlayers\
+ take turns to roll a single dice as many times as they wish,    \nadding all roll results to a running total, but losing their gained score for the turn if they roll a 1.\
+\n\x1b[95m=========================================================================================================="
         mock.assert_called_with(str)
-
-
-
-    # Add test_do_game3. Mock print when we input wrong argument.
-    # Add test_scoreboard, follow example in test_do_Game,
-    # check if scoreboard is called.
-    # Check do bye print and returning true.
-    # Check do rule print
-

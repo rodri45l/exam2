@@ -14,15 +14,15 @@ class TestGame(unittest.TestCase):
         '''Test Dice class'''
         game = Game.Game()
         self.assertIsInstance(game, Game.Game)
-    
+
     @patch('builtins.input', return_value="Rodri")
     def test_create_player(self, mock_input):
         game = Game.Game()
         player = game.createPlayer(1)
         exp = player.name == "Rodri"
         self.assertTrue(exp)
-    
-    @patch('builtins.input', return_value = "Rodri2")
+
+    @patch('builtins.input', return_value="Rodri2")
     def test_change_name(self, mock_input):
         player = Player("Rodri")
         game = Game.Game()
@@ -111,3 +111,25 @@ Enter your choice: {Bcolors.RESET}"
         player = Player("Rodri")
         exp = game.computerTurn(computer, player, 2)
         self.assertIsInstance(exp, Player)
+    
+    def test_computerTurn2(self):
+        "Test of computer turn difficulty easy."
+        game = Game.Game()
+        computer = Player("computer")
+        player = Player("Rodri")
+        exp = game.computerTurn(computer, player, 1)
+        self.assertIsInstance(exp, Player)
+
+    @patch('builtins.input', side_effect=["Rodri45Z", "yana", "5"])
+    def test_playerVsplayer1exit(self, mock_input):
+        """Test playervsplayer1 exit """
+        game = Game.Game()
+        exp = game.playerVsPlayer() 
+        self.assertEqual(exp, 0)
+
+    @patch("builtins.input", side_effect=["RODRI45Z", "Yana", "4", "RODRI45Z", "Yana", "2"])
+    def test_playerVsPlayer1Restart(self, mock_input):
+        """Test playervsPlayer1 restart"""
+        game = Game.Game()
+        exp = game.playerVsPlayer()
+        self.assertEqual(exp, 0)

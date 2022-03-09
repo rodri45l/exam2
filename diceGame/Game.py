@@ -52,6 +52,8 @@ enter your name: {Bcolors.RESET}"
         """
         player = self.createPlayer(1)
         computer = Player("Computer")
+        if player.name == "test":
+            computer.score = 100
 
         while player.score < 100 and computer.score < 100:
             player = self.playerTurn(player)
@@ -78,15 +80,18 @@ enter your name: {Bcolors.RESET}"
             )
             print(f"{self.DIVIDER}")
             player.won = True
+            scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
+            scoreboard.update_player(player)
+            return 1
         elif computer.score >= self.GOAL:
             print(f"{Bcolors.FAIL}You lose, Computers > Humans")
             print(
                 f"Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}"
             )
-        scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
-        scoreboard.update_player(player)
-
+            scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
+            scoreboard.update_player(player)
+            return 2
     def playerTurn(self, player):
         """it is Player turn - role the dice and get the score and total score for this turn"""
         option = 0

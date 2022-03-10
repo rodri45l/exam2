@@ -29,12 +29,10 @@ def should_roll(i, j, k):
     p_hold = 1 - p_win(j, i + k, 0)
     return p_roll > p_hold
 
-
 def count_zeros(p_list):
     """Count zeros in a list."""
     dic = Counter(p_list)
     return GOAL - dic[0]
-
 
 def p_win(i, j, k):
     """Calculate the probabilities of winning."""

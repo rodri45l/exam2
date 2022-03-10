@@ -1,12 +1,10 @@
 
-Dice Game
+Pig Dice Game
 ==========================
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
-The Dice game is a fun exciting game which you can play and enjoy. In this game you have the choice to play with computer or second player. You can choose the level the difficulty; wheather you want to go hard or easy.
-While playing you have 5 options 1. roll your dice 2. hold your dice for the round 3.Change name 4.Restart 5.Exit;
-You can always decide to restart the game or even exit the game!if you feel like you dont like your name and want to change it you can.There is a scoreboard in the game which hold the players records for all games so by requesting the scoreboard you get to see your score and other players  as well.And a fun feature in our game we have cheat code so that if you input the cheat code your have a high chance to win the game!
+The Pig Dice game is a fun exciting game which you can play and enjoy. The game of Pig is a very simple jeopardy dice game in which two players race to reach 100 points. Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player holds and scores the sum of the rolls (i.e. the turn total).
 
 
 ## Table of Contents
@@ -20,16 +18,19 @@ You can always decide to restart the game or even exit the game!if you feel like
 
 
 ## General Information
-Starting the game:
-For starting the game, you can Give the command " make play " or you can run the cmd_game.py.
-After startin the game, you get to choose who you want to play with; computer or a second player? and also which level of difficulty you want to play with? so please input like : play or play2 and after that hard or easy.
-You enter your name and the game starts.You have two options of rolling or holding the dice in your turn, 
-and after you did your turn the other player also play and again your turn. Every round there are other options for you aswell. the options are showed in the menu; Restart the game, Exit the game and Change your name.
-if you select restart the game; you would start your game all over again.
-if you select exit; you would exit the game. You can start over or you can see your socres; 
-if you wish to do that make the command " scoreboard " and the scoreboard is shown on the screen.
-if you select change your name, the game asks you to put your new name and immidietly your name is changed.
+To start the game the user can use the command `make play` or simply run the cmd_game.py file.
 
+Once the script starts the user can use these commands: 
+-play: Play vs the computer, the user must pass the game mode (easy, hard) as an argument. 
+-play2: Two player game.
+-rules: Show the rules.
+-scoreboard: Print the scoreboard.
+-bye : exit the game.
+-help : Prints all the commands , if another command is passed as an argument instructions for this command will be printed.
+
+## Test
+In order to be able to test the different features we added some cheat codes, when asked for the user name use HIVA, YANA OR RODRI45Z . This will allow the user to start with a score of 100 and will instantly win the game.
+There is a 4th name that can be used, if the player name is "test" the computer will instantly win the game.
 
 ## Technologies Used
 - Python - version 3.9 [![Language used: Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://github.com/python)
@@ -57,13 +58,11 @@ Using data with the probabilities to win if the user turn total is 0 we can calc
 
 ## Setup
 First step would be to set the python name used. Makefile uses `PYTHON=python` as default.
-create a virtual enviroment using the command `make venv`, once created the user should initiate this virtual enviromentusing:
--`make venv`
-And then:
+create a virtual enviroment using the command `make venv`, once created the user should initiate this virtual enviroment using:
 
-- .venv/Scripts/activate (Windows)
+-. .venv/Scripts/activate (Windows)
 
-- .venv/bin/activate (linux/MacOS)
+-. .venv/bin/activate (linux/MacOS)
 
 Then once inside the virtual enviroment the user should install the required packages using `make install`
 

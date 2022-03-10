@@ -5,9 +5,9 @@ class Player:
     """Player class with name, score, tries and wins atributes"""
 
     def __init__(self, name):
-        """Constructor, takes name as argument and sets score to 0 and won to False.
-        It also has a cheat code implemented for certain player names.
-        """        
+        """Constructor, takes name as argument, sets score to 0 and won to False.
+        includes a cheat code implemented for certain player names.
+        """
         self.name = name
         self.score = 0
         self.won = False

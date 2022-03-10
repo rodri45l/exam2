@@ -1,8 +1,8 @@
 """Dice Unittest"""
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from diceGame import Player
 import unittest
+from diceGame import Player
 
 
 class TestDice(unittest.TestCase):
@@ -20,12 +20,14 @@ class TestDice(unittest.TestCase):
         self.assertTrue(exp)
 
     def test_sum_turnscore(self):
+        """Test Sum turn score to score."""
         player = Player.Player("RODRI45Z")
         player.sum_turn_score()
         exp = player.score == 100
         self.assertTrue(exp)
 
     def test_change_name(self):
+        """Test change name."""
         player = Player.Player("pete")
         player.change_name("RODRI45Z")
         exp = player.name == "RODRI45Z"

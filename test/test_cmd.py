@@ -51,6 +51,7 @@ class TestCmd(unittest.TestCase):
         self.assertTrue(exp)
 
     @mock.patch("Scoreboard.Scoreboard.print_scorebard")
+    # """ Test Scoreboard method """
     def test_do_scoreboard(self, mock):
         """Test print scoreboard."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)

@@ -31,9 +31,9 @@
 import pickle
 from collections import Counter
 
-&#34;&#34;&#34;Code made by rodri45z,
-using data from http://cs.gettysburg.edu/projects/pig/piggame.html
-and equations from http://cs.gettysburg.edu/~tneller/papers/pig.zip&#34;&#34;&#34;
+# Code made by rodri45z,
+# using data from http://cs.gettysburg.edu/projects/pig/piggame.html
+# and equations from http://cs.gettysburg.edu/~tneller/papers/pig.zip
 
 GOAL = 100
 
@@ -47,10 +47,10 @@ for x1 in range(0, 100):
 
 
 def should_roll(i, j, k):
-    &#34;&#34;&#34;Return a boolean depending on if the player should roll or not.
-    i = Player score
-       j = Oponents score
-       k = PLayers total&#34;&#34;&#34;
+    &#34;&#34;&#34;Return a boolean depending on if the player should roll or not.&#34;&#34;&#34;
+    # i = Player score
+    # j = Oponents score
+    # k = PLayers total
     p_roll = 1 - p_win(j, i, 0)
     for dice in range(2, 7):
         p_roll += p_win(i, j, k + dice)
@@ -146,19 +146,16 @@ def p_win(i, j, k):
 <span>def <span class="ident">should_roll</span></span>(<span>i, j, k)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return a boolean depending on if the player should roll or not.
-i = Player score
-j = Oponents score
-k = PLayers total</p></div>
+<div class="desc"><p>Return a boolean depending on if the player should roll or not.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def should_roll(i, j, k):
-    &#34;&#34;&#34;Return a boolean depending on if the player should roll or not.
-    i = Player score
-       j = Oponents score
-       k = PLayers total&#34;&#34;&#34;
+    &#34;&#34;&#34;Return a boolean depending on if the player should roll or not.&#34;&#34;&#34;
+    # i = Player score
+    # j = Oponents score
+    # k = PLayers total
     p_roll = 1 - p_win(j, i, 0)
     for dice in range(2, 7):
         p_roll += p_win(i, j, k + dice)

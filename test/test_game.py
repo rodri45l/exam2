@@ -25,6 +25,14 @@ class TestGame(unittest.TestCase):
         exp = player.name == "Rodri"
         self.assertTrue(exp)
 
+    @patch('builtins.input', side_effect=["    ", "Koki"])
+    def test_create_player_2(self, mock_input):
+        """Test create player."""
+        game = Game.Game()
+        player = game.createPlayer(1)
+        exp = player.name == "Koki"
+        self.assertTrue(exp)
+
     @patch('builtins.input', return_value="Rodri2")
     def test_change_name(self, mock_input):
         """Test change name."""
@@ -33,6 +41,14 @@ class TestGame(unittest.TestCase):
         game.change_name(player)
         self.assertEqual(player.name, "Rodri2")
 
+    @patch('builtins.input', side_effect=["    ", "Rodri2"])
+    def test_change_name_2(self, mock_input):
+        """Test change name"""
+        player = Player("Rodri")
+        game = Game.Game()
+        game.change_name(player)
+        self.assertEqual(player.name, "Rodri2")    
+    
     @patch("builtins.input", return_value="1")
     def test_showOptionMenu(self, mock_input):
         """Test show option menu."""

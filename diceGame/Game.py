@@ -161,7 +161,7 @@ Computer: {computer.score}"
         return computer
 
     def playerVsPlayer(self):
-        """Two players playing - both will play and one would win and one would lose."""
+        """Two players playing """
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while player1.score < 100 and player2.score < 100:
@@ -216,6 +216,6 @@ It's Your turn!\n{self.DIVIDER}"
         scoreboard.update_player(player2)
 
     def change_name(self, player):
-        """Change your name."""
+        """Changes name."""
         new_name = input('Enter new name: ')
         player.change_name(new_name)

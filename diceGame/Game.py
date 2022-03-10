@@ -17,24 +17,31 @@ class Game:
 ======================================="
 
     def update_scoreboard(self, player):
+        """Update scoreboard data."""
         scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard.update_player(player)
 
     def showOptionMenu(self, name):
         """Print a menu with options."""
         try:
-            option = int(input(f"{Bcolors.HEADER}{self.DIVIDER}\n\
+            option = int(
+                input(
+                    f"{Bcolors.HEADER}{self.DIVIDER}\n\
 {Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
 1 to roll the dice\n\
 2 to hold your score\n\
 3 to change your name\n\
 4 to restart\n\
 5 to exit the game\n\
-Enter your choice: {Bcolors.RESET}"))
+Enter your choice: {Bcolors.RESET}"
+                )
+            )
             if option not in range(1, 6):
-                raise ValueError('Problem!')
+                raise ValueError("Problem!")
         except ValueError:
-            print(f'\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}')
+            print(
+                f"\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}"
+            )
             return self.showOptionMenu(name)
 
         return option
@@ -42,16 +49,16 @@ Enter your choice: {Bcolors.RESET}"))
     def createPlayer(self, n):
         """Create player."""
         name = input(
-                f"\n{Bcolors.OKCYAN}Please Player {n} \
+            f"\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}"
-            )
-        
+        )
+
         if len(name.replace(" ", "")) == 0:
-            print(f'\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}')
+            print(f"\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}")
             player = self.createPlayer(n)
         else:
-            player = Player(name)        
-        
+            player = Player(name)
+
         return player
 
     def playerVsMachine(self, difficulty):
@@ -111,7 +118,7 @@ Computer: {computer.score}"
                 player.score = -2
                 return player
             elif option == 5:
-                print('Game halted!')
+                print("Game halted!")
                 player.score = -1
                 return player
             elif option == 3:
@@ -227,12 +234,10 @@ It's Your turn!\n{self.DIVIDER}"
 
     def change_name(self, player):
         """Change name."""
-        new_name = input('Enter new name: ')
+        new_name = input("Enter new name: ")
 
         if len(new_name.replace(" ", "")) == 0:
-            print(f'\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}')
+            print(f"\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}")
             self.change_name(player)
         else:
             player.change_name(new_name)
-
-        

@@ -22,7 +22,7 @@ class TestDice(unittest.TestCase):
         exp = 0 < die.roll < 7
         self.assertTrue(exp)
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_roll_dice2(self, mock_print):
         """Test roll_dice method with printing."""
         die = Dice.Dice()

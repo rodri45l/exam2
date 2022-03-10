@@ -12,7 +12,7 @@ class PigGame(cmd.Cmd):
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
 {LetCol.HEADER}{DIVIDER}{LetCol.RESET}"
 
-    prompt = f'{LetCol.RESET}\nAll commands: \n|  play | play2 |\
+    prompt = f'{LetCol.RESET}\nAll commands: \n|  play (easy\hard)  |  play2  |  \
 rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} '
 
     def do_play(self, arg):

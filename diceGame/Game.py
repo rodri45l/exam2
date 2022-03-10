@@ -52,7 +52,6 @@ enter your name: {Bcolors.RESET}"
 
     def playerVsMachine(self, difficulty):
         """Player vs machine game."""
-
         player = self.createPlayer(1)
         computer = Player("Computer")
         if player.name == "test":
@@ -166,7 +165,7 @@ Computer: {computer.score}"
         return computer
 
     def playerVsPlayer(self):
-        """Two players playing """
+        """Play with 2 players."""
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while player1.score < 100 and player2.score < 100:
@@ -225,7 +224,7 @@ It's Your turn!\n{self.DIVIDER}"
             return 2
 
     def change_name(self, player):
-        """Changes name."""
+        """Change name."""
         new_name = input('Enter new name: ')
 
         if len(new_name.replace(" ", "")) == 0:

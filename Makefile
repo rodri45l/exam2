@@ -62,11 +62,11 @@ clean-all: clean clean-doc
 #
 pylint:
 	@$(call MESSAGE,$@)
-	-cd diceGame && $(PYTHON) -m pylint *.py
+	-$(PYTHON) -m pylint --rcfile .pylintrc ./diceGame/*.py
 
 flake8:
 	@$(call MESSAGE,$@)
-	-cd diceGame && $(PYTHON) -m flake8
+	-cd diceGame && $(PYTHON) -m flake8 --ignore=E501,H601,W605
 
 lint: flake8 pylint
 

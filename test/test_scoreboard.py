@@ -1,4 +1,4 @@
-"""Dice Unittest"""
+"""Dice Unittest."""
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import unittest
@@ -10,23 +10,23 @@ from diceGame import Bcolors as B
 
 
 class TestScoreboard(unittest.TestCase):
-    """Scoreboard testing class"""
+    """Scoreboard testing class."""
 
     def test_scoreboard(self):
-        '''Test Scoreboard class'''
+        """Test Scoreboard class."""
         scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         self.assertIsInstance(scoreboard, Scoreboard.Scoreboard)
 
     @patch("builtins.print")
     def test_init(self, mock):
-        '''Test if we throw FileNotFoundError exception'''
-        scoreboard = Scoreboard.Scoreboard("./wrong/scoreboardWrongName.pickle")
+        """Test if we throw FileNotFoundError exception."""
+        Scoreboard.Scoreboard("./wrong/scoreboardWrongName.pickle")
         str = "No scoreboard found, creating a new one"
         mock.assert_called_with(str)
 
     @patch("builtins.print")
     def test_print_scoreboard(self, mock):
-        """Test print_scoreboard func"""
+        """Test print_scoreboard func."""
         scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         sb = scoreboard.scoreboard
         str = "Scoreboard\n\
@@ -40,7 +40,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         mock.assert_called_with(str)
 
     def test_save_scoreboard(self):
-        """Test save_scoreboard func"""
+        """Test save_scoreboard func."""
         player = Player.Player("Test")
         player.won = True
         scoreboard = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
@@ -57,7 +57,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard.save_scoreboard()
 
     def test_update_player_1(self):
-        "Test name NOT changed, socre and games count saved correctly"
+        """Test name NOT changed, socre and games count saved correctly."""
         # Arrange:
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard
@@ -94,8 +94,8 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard_object.save_scoreboard()
 
     def test_update_player_2(self):
-        """Test - name changed and one win - socre and games count saved correctly
-        Note: We update the player at the end of the game"""
+        """Test name changed and one win score and games count saved correctly."""
+        # Note: We update the player at the end of the game
         # Arrange:
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard
@@ -136,8 +136,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard_object.save_scoreboard()
 
     def test_update_player_3(self):
-        """Test - name changed and one loss - socre and games count saved correctly
-        Note: We update the player at the end of the game"""
+        """Test - name changed and one loss - socre and games count saved correctly."""
         # Arrange:
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard
@@ -175,7 +174,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard_object.save_scoreboard()
 
     def test_update_player_4(self):
-        """Test - create a new winner (player was not found)"""
+        """Test create a new winner (player was not found)."""
         # Arrange:
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard
@@ -205,7 +204,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard_object.save_scoreboard()
 
     def test_update_player_5(self):
-        """Test - create a new looser (player was not found)"""
+        """Test create a new loser."""
         # Arrange:
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard
@@ -236,7 +235,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard_object.save_scoreboard()
 
     def test_update_player_6(self):
-        """Test - Winning - check if we delete the old name from the scoreboard"""
+        """Test - Winning - check if we delete the old name from the scoreboard."""
         # Arrange:
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard
@@ -271,7 +270,7 @@ played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard_object.save_scoreboard()
 
     def test_update_player_7(self):
-        """Test - Loosing - check if we delete the old name from the scoreboard"""
+        """Test - Loosing - check if we delete the old name from the scoreboard."""
         # Arrange:
         scoreboard_object = Scoreboard.Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard = scoreboard_object.scoreboard

@@ -20,7 +20,7 @@ The Pig Dice game is a fun exciting game which you can play and enjoy. The game 
 ## General Information
 To start the game the user can use the command `make play` or simply run the cmd_game.py file.
 
-Once the script starts the user can use these commands: 
+### Commands
 -play: Play vs the computer, the user must pass the game mode (easy, hard) as an argument. 
 -play2: Two player game.
 -rules: Show the rules.

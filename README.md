@@ -3,7 +3,7 @@ Dice Game
 ==========================
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-\n
+
 The Dice game is a fun exciting game which you can play and enjoy. In this game you have the choice to play with computer or second player. You can choose the level the difficulty; wheather you want to go hard or easy.
 While playing you have 5 options 1. roll your dice 2. hold your dice for the round 3.Change name 4.Restart 5.Exit;
 You can always decide to restart the game or even exit the game!if you feel like you dont like your name and want to change it you can.There is a scoreboard in the game which hold the players records for all games so by requesting the scoreboard you get to see your score and other players  as well.And a fun feature in our game we have cheat code so that if you input the cheat code your have a high chance to win the game!
@@ -17,9 +17,6 @@ You can always decide to restart the game or even exit the game!if you feel like
 * Features
 * Project requirements
 * Acknowledgements
-
-### Check version of Python
-Check what version of Python you have. The Makefile uses `PYTHON=python` as default.
 
 
 ## General Information
@@ -50,14 +47,28 @@ First one is the "easy" mode , where the computer just chooses a random option (
 There is one more mode available to play , the "hard" mode.
 
 
-The hard mode was developed using data and equations from the [paper](http://cs.gettysburg.edu/~tneller/papers/pig.zip)
-The module should_roll contains the source code. Using the data the function should_roll() calculates the choice with more chances of winning. These probabilities were calculated using [value iteration](https://en.wikipedia.org/wiki/Markov_decision_process#Value_iteration) data .
+The hard mode was developed using data and equations from [Optimal Play of the Dice Game Pig](http://cs.gettysburg.edu/~tneller/papers/pig.zip)
+The module should_roll contains the source code. Using the data the function should_roll() calculates the choice with more chances of winning. These probabilities were calculated using [value iteration](https://en.wikipedia.org/wiki/Markov_decision_process#Value_iteration). 
+
+Using data with the probabilities to win if the user turn total is 0 we can calculate the probabilities for the rest of scores and then calculate the choice with more probabilities.
 
 
 
 
 ## Setup
-Proceed to describe how to install / setup one's local environment / get started with the project.
+First step would be to set the python name used. Makefile uses `PYTHON=python` as default.
+create a virtual enviroment using the command `make venv`, once created the user should initiate this virtual enviromentusing:
+-`make venv`
+And then:
+
+- .venv/Scripts/activate (Windows)
+
+- .venv/bin/activate (linux/MacOS)
+
+Then once inside the virtual enviroment the user should install the required packages using `make install`
+
+After this the user can simply run `make play` to play the game or run the cmd_game.py file in the diceGame folder.
+
 
 ## Features
 - Play an awesome amusing game with rolling your DICE!

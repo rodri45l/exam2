@@ -1,28 +1,60 @@
 Release history
 ========================
 
-Decide on a way how to handled your relaeases and version numbers. Document it here.
-
-For example like this...
-
-
-
-v2.0.0 (2022-02-05)
+v1.9 (2022-03-10)
 ------------------------
 
-* Moved to a new location.
+* Game documentation created.
+* Test coverage incremented.
+* Linting fixed.
 
-
-
-v1.1.0 (2021-02-12)
+v1.8 (2022-03-09)
 ------------------------
 
-* Enabling generating documentation from comments using pdoc and pydoc.
-* Enabling UML documentation using pyreverse.
+* Computer "test" cheatcode added.
 
-
-
-v1.0.0 (2021-02-12)
+v1.7 (2022-03-08)
 ------------------------
 
-* First release, extracted from course material and further developed.
+* Scoreboard class edit to make easier to test.
+* Scoreboard path added.
+
+v1.6 (2022-03-05)
+------------------------
+
+* Tests path fix.
+
+v1.5 (2022-03-04)
+------------------------
+
+* Show menu validation added.
+
+v1.4 (2022-03-04)
+------------------------
+
+* Set difficulty added
+
+v1.3 (2022-03-03)
+------------------------
+
+* Change name added
+
+v1.2 (2022-03-02)
+------------------------
+
+* Game exit option added and restart edit.
+
+v1.1 (2022-03-02)
+------------------------
+
+* Game restart added.
+
+v1.0 (2022-02-29)
+------------------------
+
+* Scoreboard added.
+
+v0.1 (2022-02-28)
+------------------------
+
+* First release, basic Game created, missing features.

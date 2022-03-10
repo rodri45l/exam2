@@ -1,6 +1,7 @@
 [MESSAGES CONTROL]
 
 #disable=locally-disabled,locally-enabled
+disable=C0103,R1723,R0201,R1705,R0903, W0613,W1401, W0622
 
 
 [FORMAT]

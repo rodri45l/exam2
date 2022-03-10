@@ -1,4 +1,4 @@
-"""Dice Unittest"""
+"""CMD CLASS Unittest."""
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import unittest
@@ -8,10 +8,10 @@ from diceGame import cmd_game
 
 
 class TestCmd(unittest.TestCase):
-    """CMD testing class"""
+    """CMD testing class."""
 
     def test_PigGame(self):
-        '''Test  PigGame class'''
+        """Test  PigGame class."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         self.assertIsInstance(cmd_g, cmd_game.PigGame)
 
@@ -31,7 +31,7 @@ class TestCmd(unittest.TestCase):
 
     @mock.patch("builtins.print")
     def test_do_play3(self, mock):
-        """ Test if we pass an argument other thatn 1 or 2 """
+        """Test if we pass an argument other thatn 1 or 2."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_play('3')
         str = "Wrong argument, type easy or hard after 'play'."
@@ -45,7 +45,7 @@ class TestCmd(unittest.TestCase):
         self.assertTrue(mock.called)
 
     def test_do_bye(self):
-        "test do bye function"
+        """Test do bye function."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         exp = cmd_g.do_bye("")
         self.assertTrue(exp)
@@ -59,7 +59,7 @@ class TestCmd(unittest.TestCase):
 
     @mock.patch("builtins.print")
     def test_do_rule(self, mock):
-        """ Test if print function as required """
+        """Test if print function as required."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_rules("")
         str = "\x1b[95m=====================================================\

@@ -1,8 +1,8 @@
-"""Bcolors class file"""
+"""Bcolors class file."""
 
 
 class Bcolors:
-    """Colors to print in cmd"""
+    """Colors to print in cmd."""
 
     HEADER = "\033[95m"
     OKBLUE = "\033[94m"

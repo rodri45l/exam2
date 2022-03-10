@@ -39,13 +39,13 @@ class TestCmd(unittest.TestCase):
 
     @mock.patch('Game.Game.playerVsPlayer')
     def test_do_play2(self, mock):
-        """Test if do_play2 calls playerVsplayer func."""
+        """Test if do_play2 calls playerVsPlayer func."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_play2("")
         self.assertTrue(mock.called)
 
     def test_do_bye(self):
-        "test do bye function"
+        "Test do bye function"
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         exp = cmd_g.do_bye("")
         self.assertTrue(exp)

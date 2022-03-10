@@ -219,6 +219,10 @@ It's Your turn!\n{self.DIVIDER}"
         scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
         scoreboard.update_player(player1)
         scoreboard.update_player(player2)
+        if player1.won:
+            return 1
+        else:
+            return 2
 
     def change_name(self, player):
         """Changes name."""

@@ -101,23 +101,25 @@ Enter your choice: {Bcolors.RESET}"
         exp = game.playerVsMachine(1)
         self.assertEqual(exp, 1)
 
-    @patch("builtins.input", side_effect=["RODRI45Z", "yana", "2"])
-    def test_playerVsplayer(self, mock_input):
-        """Test playervsplayer player 1 win"""
-        game = Game.Game()
-        game.playerVsPlayer()
-
-    @patch("builtins.input", side_effect=["Rodri45Z", "YANA", "2", "2"])
-    def test_playerVsplayer2(self, mock_input):
-        """Test playervsplayer player 2 win"""
-        game = Game.Game()
-        game.playerVsPlayer()
-
     @patch("builtins.input", side_effect=["test"])
     def test_playerVsMachine4(self, mock_input):
         """Test playervsMachine computer wins"""
         game = Game.Game()
         exp = game.playerVsMachine(2)
+        self.assertEqual(exp, 2)
+
+    @patch("builtins.input", side_effect=["RODRI45Z", "yana", "2"])
+    def test_playerVsplayer(self, mock_input):
+        """Test playervsplayer player 1 win"""
+        game = Game.Game()
+        exp = game.playerVsPlayer()
+        self.assertEqual(exp, 1)
+
+    @patch("builtins.input", side_effect=["Robert", "YANA", "2", "2"])
+    def test_playerVsplayer2(self, mock_input):
+        """Test playervsplayer player 2 win"""
+        game = Game.Game()
+        exp = game.playerVsPlayer()
         self.assertEqual(exp, 2)
 
     def test_computerTurn(self):

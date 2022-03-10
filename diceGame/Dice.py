@@ -11,7 +11,7 @@ class Dice:
         self.roll = 0
 
     def roll_dice(self, print_dice):
-        """sets a random number between 1-6 into roll variable and
+        """Sets a random number between 1-6 into roll variable and
         if Print Dice true, it prints an ASCII drawing of the dice.
         """
         with open("./diceGame/dice_drawings.pickle", "rb") as handle:

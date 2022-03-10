@@ -37,12 +37,17 @@ Enter your choice: {Bcolors.RESET}"))
 
     def createPlayer(self, n):
         """Create player."""
-        player = Player(
-            input(
+        name = input(
                 f"\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}"
             )
-        )
+        
+        if len(name.replace(" ", "")) == 0:
+            print(f'\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}')
+            player = self.createPlayer(n)
+        else:
+            player = Player(name)        
+        
         return player
 
     def playerVsMachine(self, difficulty):
@@ -218,4 +223,11 @@ It's Your turn!\n{self.DIVIDER}"
     def change_name(self, player):
         """Change your name."""
         new_name = input('Enter new name: ')
-        player.change_name(new_name)
+
+        if len(new_name.replace(" ", "")) == 0:
+            print(f'\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}')
+            self.change_name(player)
+        else:
+            player.change_name(new_name)
+
+        

@@ -14,7 +14,11 @@ class Game:
         """Class constructor with GOAL and Divider as attributes."""
         self.GOAL = 100
         self.DIVIDER = "===================================================================\
-======================================="
+======================================="        
+    
+    def update_scoreboard(self, player):
+        scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
+        scoreboard.update_player(player)
 
     def showOptionMenu(self, name):
         """Print a menu with options."""
@@ -82,8 +86,7 @@ enter your name: {Bcolors.RESET}"
             )
             print(f"{self.DIVIDER}")
             player.won = True
-            scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 1
         elif computer.score >= self.GOAL:
             print(f"{Bcolors.FAIL}You lose, Computers > Humans")
@@ -91,8 +94,7 @@ enter your name: {Bcolors.RESET}"
                 f"Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}"
             )
-            scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 2
 
     def playerTurn(self, player):
@@ -215,9 +217,9 @@ It's Your turn!\n{self.DIVIDER}"
             f"Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}"
         )
-        scoreboard = Scoreboard("./diceGame/scoreboard.pickle")
-        scoreboard.update_player(player1)
-        scoreboard.update_player(player2)
+        self.update_scoreboard(player1)
+        self.update_scoreboard(player2)
+
         if player1.won:
             return 1
         else:

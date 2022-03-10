@@ -5,7 +5,6 @@ from diceGame import Game
 from diceGame.Bcolors import Bcolors
 from diceGame.Player import Player
 
-
 class TestGame(unittest.TestCase):
     """Game Testing class."""
 
@@ -166,3 +165,11 @@ Enter your choice: {Bcolors.RESET}"
         game = Game.Game()
         exp = game.playerVsPlayer()
         self.assertEqual(exp, 0)
+
+    @patch("Scoreboard.Scoreboard.update_player")
+    def test_update_scoreboard(self, mock):
+        """Test print update scoreboard"""
+        game = Game.Game()
+        player = Player("Rodri")
+        game.update_scoreboard(player)
+        self.assertTrue(mock.called)

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>Dice API documentation</title>
-<meta name="description" content="Dice class file" />
+<meta name="description" content="Dice class file." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,27 +22,25 @@
 <h1 class="title">Module <code>Dice</code></h1>
 </header>
 <section id="section-intro">
-<p>Dice class file</p>
+<p>Dice class file.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Dice class file&#34;&#34;&#34;
+<pre><code class="python">&#34;&#34;&#34;Dice class file.&#34;&#34;&#34;
 from random import randint
 import pickle
 
 
 class Dice:
-    &#34;&#34;&#34;Dice class with roll argument&#34;&#34;&#34;
+    &#34;&#34;&#34;Dice class with roll argument.&#34;&#34;&#34;
 
     def __init__(self):
-        &#34;&#34;&#34;Constructor for dice class, sets roll to 0&#34;&#34;&#34;
+        &#34;&#34;&#34;Construct the dice class, sets roll to 0.&#34;&#34;&#34;
         self.roll = 0
 
     def roll_dice(self, print_dice):
-        &#34;&#34;&#34;sets a random number between 1-6 into roll variable and
-        if Print Dice true, it prints an ASCII drawing of the dice.
-        &#34;&#34;&#34;
+        &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice&#34;&#34;&#34;
         with open(&#34;./diceGame/dice_drawings.pickle&#34;, &#34;rb&#34;) as handle:
             dice_face_dic = pickle.load(handle)
             self.roll = randint(1, 6)
@@ -63,23 +61,21 @@ class Dice:
 <span>class <span class="ident">Dice</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Dice class with roll argument</p>
-<p>Constructor for dice class, sets roll to 0</p></div>
+<div class="desc"><p>Dice class with roll argument.</p>
+<p>Construct the dice class, sets roll to 0.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Dice:
-    &#34;&#34;&#34;Dice class with roll argument&#34;&#34;&#34;
+    &#34;&#34;&#34;Dice class with roll argument.&#34;&#34;&#34;
 
     def __init__(self):
-        &#34;&#34;&#34;Constructor for dice class, sets roll to 0&#34;&#34;&#34;
+        &#34;&#34;&#34;Construct the dice class, sets roll to 0.&#34;&#34;&#34;
         self.roll = 0
 
     def roll_dice(self, print_dice):
-        &#34;&#34;&#34;sets a random number between 1-6 into roll variable and
-        if Print Dice true, it prints an ASCII drawing of the dice.
-        &#34;&#34;&#34;
+        &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice&#34;&#34;&#34;
         with open(&#34;./diceGame/dice_drawings.pickle&#34;, &#34;rb&#34;) as handle:
             dice_face_dic = pickle.load(handle)
             self.roll = randint(1, 6)
@@ -92,16 +88,13 @@ class Dice:
 <span>def <span class="ident">roll_dice</span></span>(<span>self, print_dice)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>sets a random number between 1-6 into roll variable and
-if Print Dice true, it prints an ASCII drawing of the dice.</p></div>
+<div class="desc"><p>Set roll attribute as a random number from 1 to 6 and print dice</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def roll_dice(self, print_dice):
-    &#34;&#34;&#34;sets a random number between 1-6 into roll variable and
-    if Print Dice true, it prints an ASCII drawing of the dice.
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice&#34;&#34;&#34;
     with open(&#34;./diceGame/dice_drawings.pickle&#34;, &#34;rb&#34;) as handle:
         dice_face_dic = pickle.load(handle)
         self.roll = randint(1, 6)

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>Game API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Game module containing functions for the pig game." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,66 +22,70 @@
 <h1 class="title">Module <code>Game</code></h1>
 </header>
 <section id="section-intro">
+<p>Game module containing functions for the pig game.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from Bcolors import Bcolors
+<pre><code class="python">&#34;&#34;&#34;Game module containing functions for the pig game.&#34;&#34;&#34;
+from random import randint
+from Bcolors import Bcolors
 import should_roll as prob
 from Player import Player
 from Scoreboard import Scoreboard
 from Dice import Dice
-from random import randint
 
 
 class Game:
-    &#34;&#34;&#34;Game class with methods for the game&#34;&#34;&#34;
+    &#34;&#34;&#34;Game class with methods for the game.&#34;&#34;&#34;
 
     def __init__(self):
+        &#34;&#34;&#34;Class constructor with GOAL and Divider as attributes.&#34;&#34;&#34;
         self.GOAL = 100
         self.DIVIDER = &#34;===================================================================\
 =======================================&#34;
 
-    def showOptionMenu(self):
-        &#34;&#34;&#34;Printing a menu with option of playing or not for the turn&#34;&#34;&#34;
+    def showOptionMenu(self, name):
+        &#34;&#34;&#34;Print a menu with options.&#34;&#34;&#34;
         try:
-            print(&#34;Enter 1 to roll the dice&#34;)
-            print(&#34;Enter 2 to hold your score&#34;)
-            print(&#34;Enter 3 to change your name&#34;)
-            print(&#34;Enter 4 to restart&#34;)
-            print(&#34;Enter 5 to exit the game&#34;)
-            option2 = int(input(f&#34;Enter your choice: {Bcolors.RESET}&#34;))
+            option = int(input(f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
+{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
+1 to roll the dice\n\
+2 to hold your score\n\
+3 to change your name\n\
+4 to restart\n\
+5 to exit the game\n\
+Enter your choice: {Bcolors.RESET}&#34;))
+            if option not in range(1, 6):
+                raise ValueError(&#39;Problem!&#39;)
         except ValueError:
-            print(&#39;Invalid option&#39;)
-            return self.showOptionMenu()
+            print(f&#39;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#39;)
+            return self.showOptionMenu(name)
 
-        return option2
+        return option
 
     def createPlayer(self, n):
-        &#34;&#34;&#34;Creating player&#34;&#34;&#34;
-        player = Player(
-            input(
-                f&#34;{Bcolors.OKCYAN}Please Player{n} \
+        &#34;&#34;&#34;Create player.&#34;&#34;&#34;
+        name = input(
+                f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}&#34;
             )
-        )
+        
+        if len(name.replace(&#34; &#34;, &#34;&#34;)) == 0:
+            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            player = self.createPlayer(n)
+        else:
+            player = Player(name)        
+        
         return player
 
-    def set_difficulty(self):
-        &#34;&#34;&#34;returns the difficulty mode&#34;&#34;&#34;
-        difficulty = 0
-        while difficulty not in [1, 2]:
-            print(&#34;1. Easy mode\n2. Hard mode.&#34;)
-            difficulty = int(input(&#34;Please enter the difficulty: &#34;))
-        return difficulty
-
-    def playerVsMachine(self):
-        &#34;&#34;&#34;Player will compete with computer -
-        both will play and winner will be displayed
-        &#34;&#34;&#34;
+    def playerVsMachine(self, difficulty):
+        &#34;&#34;&#34;Player vs machine game.&#34;&#34;&#34;
         player = self.createPlayer(1)
-        difficulty = self.set_difficulty()
         computer = Player(&#34;Computer&#34;)
+        if player.name == &#34;test&#34;:
+            computer.score = 100
+
         while player.score &lt; 100 and computer.score &lt; 100:
             player = self.playerTurn(player)
             if player.score &gt;= 100:
@@ -89,8 +93,9 @@ enter your name: {Bcolors.RESET}&#34;
             elif player.score == -1:
                 return 0
             elif player.score == -2:
-                self.playerVsMachine()
+                self.playerVsMachine(difficulty)
                 return 0
+
             computer = self.computerTurn(computer, player, difficulty)
             if computer.score &gt;= 100:
                 break
@@ -106,30 +111,30 @@ enter your name: {Bcolors.RESET}&#34;
             )
             print(f&#34;{self.DIVIDER}&#34;)
             player.won = True
+            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+            scoreboard.update_player(player)
+            return 1
         elif computer.score &gt;= self.GOAL:
-            print(f&#34;{Bcolors.FAIL}You lose, computers &gt; humans&#34;)
+            print(f&#34;{Bcolors.FAIL}You lose, Computers &gt; Humans&#34;)
             print(
                 f&#34;Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}&#34;
             )
-        scoreboard = Scoreboard()
-        scoreboard.update_player(player)
+            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+            scoreboard.update_player(player)
+            return 2
 
     def playerTurn(self, player):
-        &#34;&#34;&#34;it is Player turn - role the dice and get the score and total score for this turn&#34;&#34;&#34;
+        &#34;&#34;&#34;Player turn.&#34;&#34;&#34;
         option = 0
         keepRunning = True
         x = Dice()
         while keepRunning:
-            print(
-                f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
-{Bcolors.UNDERLINE}Please {player.name} choose:{Bcolors.NOT_UNDERLINED}&#34;
-            )
-            option = self.showOptionMenu()
+            option = self.showOptionMenu(player.name)
             if option == 2:
                 keepRunning = False
             elif option == 4:
-                print(&#34;restarting the game...&#34;)
+                print(&#34;Restarting the game...&#34;)
                 player.score = -2
                 return player
             elif option == 5:
@@ -138,7 +143,6 @@ Computer: {computer.score}&#34;
                 return player
             elif option == 3:
                 self.change_name(player)
-                pass
             elif option == 1:
                 x.roll_dice(True)
 
@@ -158,11 +162,6 @@ Computer: {computer.score}&#34;
                         f&#34;{Bcolors.OKBLUE}Your score for this turn is:\
     {player.turn_score}&#34;
                     )
-            else:
-                print(
-                    f&#34;{Bcolors.FAIL}!!!!!!\nPlease enter a \
-valid option\n!!!!!!&#34;
-                )
         print(f&#34;{Bcolors.OKBLUE}Your score this turn is {player.turn_score}&#34;)
         player.sum_turn_score()
         print(f&#34;{player.name}&#39;s Total score this turn is {player.score}&#34;)
@@ -170,7 +169,7 @@ valid option\n!!!!!!&#34;
         return player
 
     def computerTurn(self, computer, player, difficulty):
-        &#34;&#34;&#34;Computer turn - role the dice and get the score and total score for this turn&#34;&#34;&#34;
+        &#34;&#34;&#34;Play as computer.&#34;&#34;&#34;
         dice = Dice()
         while prob.should_roll(computer.score, player.score, computer.turn_score):
             if difficulty == 1:
@@ -184,18 +183,18 @@ valid option\n!!!!!!&#34;
             dice.roll_dice(False)
             if dice.roll == 1:
                 computer.turn_score = 0
-                print(f&#34;Computer score this turn is {computer.score}&#34;)
-                print(f&#34;Computer Total score is {computer.score}&#34;)
+                print(f&#34;Computer Score this turn is {computer.score}&#34;)
+                print(f&#34;Computer Total Score is {computer.score}&#34;)
                 return computer
             else:
                 computer.turn_score += dice.roll
-        print(f&#34;Computer score this turn is {computer.turn_score}&#34;)
+        print(f&#34;Computer Score this turn is {computer.turn_score}&#34;)
         computer.sum_turn_score()
-        print(f&#34;Computer Total score is {computer.score}&#34;)
+        print(f&#34;Computer Total Score is {computer.score}&#34;)
         return computer
 
     def playerVsPlayer(self):
-        &#34;&#34;&#34;Two players playing - both will play and one would win and one would lose&#34;&#34;&#34;
+        &#34;&#34;&#34;Play with 2 players.&#34;&#34;&#34;
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while player1.score &lt; 100 and player2.score &lt; 100:
@@ -245,13 +244,25 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
             f&#34;Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}&#34;
         )
-        scoreboard = Scoreboard()
+        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
         scoreboard.update_player(player1)
         scoreboard.update_player(player2)
+        if player1.won:
+            return 1
+        else:
+            return 2
 
     def change_name(self, player):
+        &#34;&#34;&#34;Change name.&#34;&#34;&#34;
         new_name = input(&#39;Enter new name: &#39;)
-        player.change_name(new_name)</code></pre>
+
+        if len(new_name.replace(&#34; &#34;, &#34;&#34;)) == 0:
+            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            self.change_name(player)
+        else:
+            player.change_name(new_name)
+
+        </code></pre>
 </details>
 </section>
 <section>
@@ -267,59 +278,62 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 <span>class <span class="ident">Game</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Game class with methods for the game</p></div>
+<div class="desc"><p>Game class with methods for the game.</p>
+<p>Class constructor with GOAL and Divider as attributes.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Game:
-    &#34;&#34;&#34;Game class with methods for the game&#34;&#34;&#34;
+    &#34;&#34;&#34;Game class with methods for the game.&#34;&#34;&#34;
 
     def __init__(self):
+        &#34;&#34;&#34;Class constructor with GOAL and Divider as attributes.&#34;&#34;&#34;
         self.GOAL = 100
         self.DIVIDER = &#34;===================================================================\
 =======================================&#34;
 
-    def showOptionMenu(self):
-        &#34;&#34;&#34;Printing a menu with option of playing or not for the turn&#34;&#34;&#34;
+    def showOptionMenu(self, name):
+        &#34;&#34;&#34;Print a menu with options.&#34;&#34;&#34;
         try:
-            print(&#34;Enter 1 to roll the dice&#34;)
-            print(&#34;Enter 2 to hold your score&#34;)
-            print(&#34;Enter 3 to change your name&#34;)
-            print(&#34;Enter 4 to restart&#34;)
-            print(&#34;Enter 5 to exit the game&#34;)
-            option2 = int(input(f&#34;Enter your choice: {Bcolors.RESET}&#34;))
+            option = int(input(f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
+{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
+1 to roll the dice\n\
+2 to hold your score\n\
+3 to change your name\n\
+4 to restart\n\
+5 to exit the game\n\
+Enter your choice: {Bcolors.RESET}&#34;))
+            if option not in range(1, 6):
+                raise ValueError(&#39;Problem!&#39;)
         except ValueError:
-            print(&#39;Invalid option&#39;)
-            return self.showOptionMenu()
+            print(f&#39;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#39;)
+            return self.showOptionMenu(name)
 
-        return option2
+        return option
 
     def createPlayer(self, n):
-        &#34;&#34;&#34;Creating player&#34;&#34;&#34;
-        player = Player(
-            input(
-                f&#34;{Bcolors.OKCYAN}Please Player{n} \
+        &#34;&#34;&#34;Create player.&#34;&#34;&#34;
+        name = input(
+                f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}&#34;
             )
-        )
+        
+        if len(name.replace(&#34; &#34;, &#34;&#34;)) == 0:
+            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            player = self.createPlayer(n)
+        else:
+            player = Player(name)        
+        
         return player
 
-    def set_difficulty(self):
-        &#34;&#34;&#34;returns the difficulty mode&#34;&#34;&#34;
-        difficulty = 0
-        while difficulty not in [1, 2]:
-            print(&#34;1. Easy mode\n2. Hard mode.&#34;)
-            difficulty = int(input(&#34;Please enter the difficulty: &#34;))
-        return difficulty
-
-    def playerVsMachine(self):
-        &#34;&#34;&#34;Player will compete with computer -
-        both will play and winner will be displayed
-        &#34;&#34;&#34;
+    def playerVsMachine(self, difficulty):
+        &#34;&#34;&#34;Player vs machine game.&#34;&#34;&#34;
         player = self.createPlayer(1)
-        difficulty = self.set_difficulty()
         computer = Player(&#34;Computer&#34;)
+        if player.name == &#34;test&#34;:
+            computer.score = 100
+
         while player.score &lt; 100 and computer.score &lt; 100:
             player = self.playerTurn(player)
             if player.score &gt;= 100:
@@ -327,8 +341,9 @@ enter your name: {Bcolors.RESET}&#34;
             elif player.score == -1:
                 return 0
             elif player.score == -2:
-                self.playerVsMachine()
+                self.playerVsMachine(difficulty)
                 return 0
+
             computer = self.computerTurn(computer, player, difficulty)
             if computer.score &gt;= 100:
                 break
@@ -344,30 +359,30 @@ enter your name: {Bcolors.RESET}&#34;
             )
             print(f&#34;{self.DIVIDER}&#34;)
             player.won = True
+            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+            scoreboard.update_player(player)
+            return 1
         elif computer.score &gt;= self.GOAL:
-            print(f&#34;{Bcolors.FAIL}You lose, computers &gt; humans&#34;)
+            print(f&#34;{Bcolors.FAIL}You lose, Computers &gt; Humans&#34;)
             print(
                 f&#34;Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}&#34;
             )
-        scoreboard = Scoreboard()
-        scoreboard.update_player(player)
+            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+            scoreboard.update_player(player)
+            return 2
 
     def playerTurn(self, player):
-        &#34;&#34;&#34;it is Player turn - role the dice and get the score and total score for this turn&#34;&#34;&#34;
+        &#34;&#34;&#34;Player turn.&#34;&#34;&#34;
         option = 0
         keepRunning = True
         x = Dice()
         while keepRunning:
-            print(
-                f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
-{Bcolors.UNDERLINE}Please {player.name} choose:{Bcolors.NOT_UNDERLINED}&#34;
-            )
-            option = self.showOptionMenu()
+            option = self.showOptionMenu(player.name)
             if option == 2:
                 keepRunning = False
             elif option == 4:
-                print(&#34;restarting the game...&#34;)
+                print(&#34;Restarting the game...&#34;)
                 player.score = -2
                 return player
             elif option == 5:
@@ -376,7 +391,6 @@ Computer: {computer.score}&#34;
                 return player
             elif option == 3:
                 self.change_name(player)
-                pass
             elif option == 1:
                 x.roll_dice(True)
 
@@ -396,11 +410,6 @@ Computer: {computer.score}&#34;
                         f&#34;{Bcolors.OKBLUE}Your score for this turn is:\
     {player.turn_score}&#34;
                     )
-            else:
-                print(
-                    f&#34;{Bcolors.FAIL}!!!!!!\nPlease enter a \
-valid option\n!!!!!!&#34;
-                )
         print(f&#34;{Bcolors.OKBLUE}Your score this turn is {player.turn_score}&#34;)
         player.sum_turn_score()
         print(f&#34;{player.name}&#39;s Total score this turn is {player.score}&#34;)
@@ -408,7 +417,7 @@ valid option\n!!!!!!&#34;
         return player
 
     def computerTurn(self, computer, player, difficulty):
-        &#34;&#34;&#34;Computer turn - role the dice and get the score and total score for this turn&#34;&#34;&#34;
+        &#34;&#34;&#34;Play as computer.&#34;&#34;&#34;
         dice = Dice()
         while prob.should_roll(computer.score, player.score, computer.turn_score):
             if difficulty == 1:
@@ -422,18 +431,18 @@ valid option\n!!!!!!&#34;
             dice.roll_dice(False)
             if dice.roll == 1:
                 computer.turn_score = 0
-                print(f&#34;Computer score this turn is {computer.score}&#34;)
-                print(f&#34;Computer Total score is {computer.score}&#34;)
+                print(f&#34;Computer Score this turn is {computer.score}&#34;)
+                print(f&#34;Computer Total Score is {computer.score}&#34;)
                 return computer
             else:
                 computer.turn_score += dice.roll
-        print(f&#34;Computer score this turn is {computer.turn_score}&#34;)
+        print(f&#34;Computer Score this turn is {computer.turn_score}&#34;)
         computer.sum_turn_score()
-        print(f&#34;Computer Total score is {computer.score}&#34;)
+        print(f&#34;Computer Total Score is {computer.score}&#34;)
         return computer
 
     def playerVsPlayer(self):
-        &#34;&#34;&#34;Two players playing - both will play and one would win and one would lose&#34;&#34;&#34;
+        &#34;&#34;&#34;Play with 2 players.&#34;&#34;&#34;
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while player1.score &lt; 100 and player2.score &lt; 100:
@@ -483,13 +492,23 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
             f&#34;Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}&#34;
         )
-        scoreboard = Scoreboard()
+        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
         scoreboard.update_player(player1)
         scoreboard.update_player(player2)
+        if player1.won:
+            return 1
+        else:
+            return 2
 
     def change_name(self, player):
+        &#34;&#34;&#34;Change name.&#34;&#34;&#34;
         new_name = input(&#39;Enter new name: &#39;)
-        player.change_name(new_name)</code></pre>
+
+        if len(new_name.replace(&#34; &#34;, &#34;&#34;)) == 0:
+            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            self.change_name(player)
+        else:
+            player.change_name(new_name)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -497,27 +516,33 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 <span>def <span class="ident">change_name</span></span>(<span>self, player)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Change name.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def change_name(self, player):
+    &#34;&#34;&#34;Change name.&#34;&#34;&#34;
     new_name = input(&#39;Enter new name: &#39;)
-    player.change_name(new_name)</code></pre>
+
+    if len(new_name.replace(&#34; &#34;, &#34;&#34;)) == 0:
+        print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+        self.change_name(player)
+    else:
+        player.change_name(new_name)</code></pre>
 </details>
 </dd>
 <dt id="Game.Game.computerTurn"><code class="name flex">
 <span>def <span class="ident">computerTurn</span></span>(<span>self, computer, player, difficulty)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Computer turn - role the dice and get the score and total score for this turn</p></div>
+<div class="desc"><p>Play as computer.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def computerTurn(self, computer, player, difficulty):
-    &#34;&#34;&#34;Computer turn - role the dice and get the score and total score for this turn&#34;&#34;&#34;
+    &#34;&#34;&#34;Play as computer.&#34;&#34;&#34;
     dice = Dice()
     while prob.should_roll(computer.score, player.score, computer.turn_score):
         if difficulty == 1:
@@ -531,14 +556,14 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
         dice.roll_dice(False)
         if dice.roll == 1:
             computer.turn_score = 0
-            print(f&#34;Computer score this turn is {computer.score}&#34;)
-            print(f&#34;Computer Total score is {computer.score}&#34;)
+            print(f&#34;Computer Score this turn is {computer.score}&#34;)
+            print(f&#34;Computer Total Score is {computer.score}&#34;)
             return computer
         else:
             computer.turn_score += dice.roll
-    print(f&#34;Computer score this turn is {computer.turn_score}&#34;)
+    print(f&#34;Computer Score this turn is {computer.turn_score}&#34;)
     computer.sum_turn_score()
-    print(f&#34;Computer Total score is {computer.score}&#34;)
+    print(f&#34;Computer Total Score is {computer.score}&#34;)
     return computer</code></pre>
 </details>
 </dd>
@@ -546,19 +571,24 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 <span>def <span class="ident">createPlayer</span></span>(<span>self, n)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Creating player</p></div>
+<div class="desc"><p>Create player.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">    def createPlayer(self, n):
-        &#34;&#34;&#34;Creating player&#34;&#34;&#34;
-        player = Player(
-            input(
-                f&#34;{Bcolors.OKCYAN}Please Player{n} \
+        &#34;&#34;&#34;Create player.&#34;&#34;&#34;
+        name = input(
+                f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}&#34;
             )
-        )
+        
+        if len(name.replace(&#34; &#34;, &#34;&#34;)) == 0:
+            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            player = self.createPlayer(n)
+        else:
+            player = Player(name)        
+        
         return player</code></pre>
 </details>
 </dd>
@@ -566,26 +596,22 @@ enter your name: {Bcolors.RESET}&#34;
 <span>def <span class="ident">playerTurn</span></span>(<span>self, player)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>it is Player turn - role the dice and get the score and total score for this turn</p></div>
+<div class="desc"><p>Player turn.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">    def playerTurn(self, player):
-        &#34;&#34;&#34;it is Player turn - role the dice and get the score and total score for this turn&#34;&#34;&#34;
+        &#34;&#34;&#34;Player turn.&#34;&#34;&#34;
         option = 0
         keepRunning = True
         x = Dice()
         while keepRunning:
-            print(
-                f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
-{Bcolors.UNDERLINE}Please {player.name} choose:{Bcolors.NOT_UNDERLINED}&#34;
-            )
-            option = self.showOptionMenu()
+            option = self.showOptionMenu(player.name)
             if option == 2:
                 keepRunning = False
             elif option == 4:
-                print(&#34;restarting the game...&#34;)
+                print(&#34;Restarting the game...&#34;)
                 player.score = -2
                 return player
             elif option == 5:
@@ -594,7 +620,6 @@ enter your name: {Bcolors.RESET}&#34;
                 return player
             elif option == 3:
                 self.change_name(player)
-                pass
             elif option == 1:
                 x.roll_dice(True)
 
@@ -614,11 +639,6 @@ enter your name: {Bcolors.RESET}&#34;
                         f&#34;{Bcolors.OKBLUE}Your score for this turn is:\
     {player.turn_score}&#34;
                     )
-            else:
-                print(
-                    f&#34;{Bcolors.FAIL}!!!!!!\nPlease enter a \
-valid option\n!!!!!!&#34;
-                )
         print(f&#34;{Bcolors.OKBLUE}Your score this turn is {player.turn_score}&#34;)
         player.sum_turn_score()
         print(f&#34;{player.name}&#39;s Total score this turn is {player.score}&#34;)
@@ -627,22 +647,21 @@ valid option\n!!!!!!&#34;
 </details>
 </dd>
 <dt id="Game.Game.playerVsMachine"><code class="name flex">
-<span>def <span class="ident">playerVsMachine</span></span>(<span>self)</span>
+<span>def <span class="ident">playerVsMachine</span></span>(<span>self, difficulty)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Player will compete with computer -
-both will play and winner will be displayed</p></div>
+<div class="desc"><p>Player vs machine game.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">    def playerVsMachine(self):
-        &#34;&#34;&#34;Player will compete with computer -
-        both will play and winner will be displayed
-        &#34;&#34;&#34;
+<pre><code class="python">    def playerVsMachine(self, difficulty):
+        &#34;&#34;&#34;Player vs machine game.&#34;&#34;&#34;
         player = self.createPlayer(1)
-        difficulty = self.set_difficulty()
         computer = Player(&#34;Computer&#34;)
+        if player.name == &#34;test&#34;:
+            computer.score = 100
+
         while player.score &lt; 100 and computer.score &lt; 100:
             player = self.playerTurn(player)
             if player.score &gt;= 100:
@@ -650,8 +669,9 @@ both will play and winner will be displayed</p></div>
             elif player.score == -1:
                 return 0
             elif player.score == -2:
-                self.playerVsMachine()
+                self.playerVsMachine(difficulty)
                 return 0
+
             computer = self.computerTurn(computer, player, difficulty)
             if computer.score &gt;= 100:
                 break
@@ -667,27 +687,31 @@ both will play and winner will be displayed</p></div>
             )
             print(f&#34;{self.DIVIDER}&#34;)
             player.won = True
+            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+            scoreboard.update_player(player)
+            return 1
         elif computer.score &gt;= self.GOAL:
-            print(f&#34;{Bcolors.FAIL}You lose, computers &gt; humans&#34;)
+            print(f&#34;{Bcolors.FAIL}You lose, Computers &gt; Humans&#34;)
             print(
                 f&#34;Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}&#34;
             )
-        scoreboard = Scoreboard()
-        scoreboard.update_player(player)</code></pre>
+            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+            scoreboard.update_player(player)
+            return 2</code></pre>
 </details>
 </dd>
 <dt id="Game.Game.playerVsPlayer"><code class="name flex">
 <span>def <span class="ident">playerVsPlayer</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Two players playing - both will play and one would win and one would lose</p></div>
+<div class="desc"><p>Play with 2 players.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">    def playerVsPlayer(self):
-        &#34;&#34;&#34;Two players playing - both will play and one would win and one would lose&#34;&#34;&#34;
+        &#34;&#34;&#34;Play with 2 players.&#34;&#34;&#34;
         player1 = self.createPlayer(1)
         player2 = self.createPlayer(2)
         while player1.score &lt; 100 and player2.score &lt; 100:
@@ -737,52 +761,42 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
             f&#34;Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}&#34;
         )
-        scoreboard = Scoreboard()
+        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
         scoreboard.update_player(player1)
-        scoreboard.update_player(player2)</code></pre>
-</details>
-</dd>
-<dt id="Game.Game.set_difficulty"><code class="name flex">
-<span>def <span class="ident">set_difficulty</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>returns the difficulty mode</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def set_difficulty(self):
-    &#34;&#34;&#34;returns the difficulty mode&#34;&#34;&#34;
-    difficulty = 0
-    while difficulty not in [1, 2]:
-        print(&#34;1. Easy mode\n2. Hard mode.&#34;)
-        difficulty = int(input(&#34;Please enter the difficulty: &#34;))
-    return difficulty</code></pre>
+        scoreboard.update_player(player2)
+        if player1.won:
+            return 1
+        else:
+            return 2</code></pre>
 </details>
 </dd>
 <dt id="Game.Game.showOptionMenu"><code class="name flex">
-<span>def <span class="ident">showOptionMenu</span></span>(<span>self)</span>
+<span>def <span class="ident">showOptionMenu</span></span>(<span>self, name)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Printing a menu with option of playing or not for the turn</p></div>
+<div class="desc"><p>Print a menu with options.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def showOptionMenu(self):
-    &#34;&#34;&#34;Printing a menu with option of playing or not for the turn&#34;&#34;&#34;
-    try:
-        print(&#34;Enter 1 to roll the dice&#34;)
-        print(&#34;Enter 2 to hold your score&#34;)
-        print(&#34;Enter 3 to change your name&#34;)
-        print(&#34;Enter 4 to restart&#34;)
-        print(&#34;Enter 5 to exit the game&#34;)
-        option2 = int(input(f&#34;Enter your choice: {Bcolors.RESET}&#34;))
-    except ValueError:
-        print(&#39;Invalid option&#39;)
-        return self.showOptionMenu()
+<pre><code class="python">    def showOptionMenu(self, name):
+        &#34;&#34;&#34;Print a menu with options.&#34;&#34;&#34;
+        try:
+            option = int(input(f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
+{Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
+1 to roll the dice\n\
+2 to hold your score\n\
+3 to change your name\n\
+4 to restart\n\
+5 to exit the game\n\
+Enter your choice: {Bcolors.RESET}&#34;))
+            if option not in range(1, 6):
+                raise ValueError(&#39;Problem!&#39;)
+        except ValueError:
+            print(f&#39;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#39;)
+            return self.showOptionMenu(name)
 
-    return option2</code></pre>
+        return option</code></pre>
 </details>
 </dd>
 </dl>
@@ -807,7 +821,6 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 <li><code><a title="Game.Game.playerTurn" href="#Game.Game.playerTurn">playerTurn</a></code></li>
 <li><code><a title="Game.Game.playerVsMachine" href="#Game.Game.playerVsMachine">playerVsMachine</a></code></li>
 <li><code><a title="Game.Game.playerVsPlayer" href="#Game.Game.playerVsPlayer">playerVsPlayer</a></code></li>
-<li><code><a title="Game.Game.set_difficulty" href="#Game.Game.set_difficulty">set_difficulty</a></code></li>
 <li><code><a title="Game.Game.showOptionMenu" href="#Game.Game.showOptionMenu">showOptionMenu</a></code></li>
 </ul>
 </li>

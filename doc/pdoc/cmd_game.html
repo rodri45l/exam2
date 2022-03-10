@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>cmd_game API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Cmd module ussing cmd class for game loop." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,51 +22,60 @@
 <h1 class="title">Module <code>cmd_game</code></h1>
 </header>
 <section id="section-intro">
+<p>Cmd module ussing cmd class for game loop.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import cmd
+<pre><code class="python">&#34;&#34;&#34;Cmd module ussing cmd class for game loop.&#34;&#34;&#34;
+import cmd
 from Game import Game
 from Scoreboard import Scoreboard
 from Bcolors import Bcolors as LetCol
 
 
 class PigGame(cmd.Cmd):
+    &#34;&#34;&#34;PigGame cmd Class.&#34;&#34;&#34;
+
     DIVIDER = &#34;===================================================================\
 =======================================&#34;
     intro = f&#34;{LetCol.HEADER}{DIVIDER}\n\
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
-{LetCol.HEADER}{DIVIDER}&#34;
-
-    prompt = f&#34;{LetCol.WARNING}(Pig Game) &#34;
+{LetCol.HEADER}{DIVIDER}{LetCol.RESET}&#34;
+    prompt = f&#39;{LetCol.RESET}\nAll commands: \n|  play (easy\hard)  |  play2  |  \
+rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} &#39;
 
     def do_play(self, arg):
-        &#34;Enter 1 to play vs the computer, 2 for 2 player game.&#34;
+        &#34;&#34;&#34;Play versus computer, enter hard or easy as an argument after &#39;play&#39;.&#34;&#34;&#34;
         game = Game()
-        if arg == &#34;1&#34;:
-            game.playerVsMachine()
-        elif arg == &#34;2&#34;:
-            game.playerVsPlayer()
+        if arg == &#34;hard&#34;:
+            game.playerVsMachine(2)
+        elif arg == &#34;easy&#34;:
+            game.playerVsMachine(1)
         else:
-            print(f&#34;please press 1 or 2 (you pressed: {arg})&#34;)
+            print(&#34;Wrong argument, type easy or hard after &#39;play&#39;.&#34;)
+
+    def do_play2(self, arg):
+        &#34;&#34;&#34;2 player game.&#34;&#34;&#34;
+        game = Game()
+        game.playerVsPlayer()
 
     def do_scoreboard(self, arg):
-        &#39;Prints Scoreboard&#39;
-        scoreboard = Scoreboard()
+        &#34;&#34;&#34;Print Scoreboard.&#34;&#34;&#34;
+        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
         scoreboard.print_scorebard()
 
     def do_bye(self, arg):
-        &#34;close the game.&#34;
-        print(&#34;Thank you for playing. bye!!&#34;)
+        &#34;&#34;&#34;Close the game.&#34;&#34;&#34;
+        print(&#34;Thank you for playing. Bye!!&#34;)
         return True
 
     def do_rules(self, arg):
-        &#34;Show game rules.&#34;
+        &#34;&#34;&#34;Show game rules.&#34;&#34;&#34;
         DIVIDER = &#34;===================================================================\
 =======================================&#34;
         print(
-            f&#34;{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the\
+            f&#34;{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the \
 first player to \
 reach 100 points{LetCol.OKCYAN}\n\
 Players take turns to roll a single dice as many times\
@@ -93,14 +102,7 @@ if __name__ == &#34;__main__&#34;:
 <span>(</span><span>completekey='tab', stdin=None, stdout=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>A simple framework for writing line-oriented command interpreters.</p>
-<p>These are often useful for test harnesses, administrative tools, and
-prototypes that will later be wrapped in a more sophisticated interface.</p>
-<p>A Cmd instance or subclass instance is a line-oriented interpreter
-framework.
-There is no good reason to instantiate Cmd itself; rather,
-it's useful as a superclass of an interpreter class you define yourself
-in order to inherit Cmd's methods and encapsulate action methods.</p>
+<div class="desc"><p>PigGame cmd Class.</p>
 <p>Instantiate a line-oriented interpreter framework.</p>
 <p>The optional argument 'completekey' is the readline name of a
 completion key; it defaults to the Tab key. If completekey is
@@ -113,40 +115,47 @@ sys.stdin and sys.stdout are used.</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class PigGame(cmd.Cmd):
+    &#34;&#34;&#34;PigGame cmd Class.&#34;&#34;&#34;
+
     DIVIDER = &#34;===================================================================\
 =======================================&#34;
     intro = f&#34;{LetCol.HEADER}{DIVIDER}\n\
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
-{LetCol.HEADER}{DIVIDER}&#34;
-
-    prompt = f&#34;{LetCol.WARNING}(Pig Game) &#34;
+{LetCol.HEADER}{DIVIDER}{LetCol.RESET}&#34;
+    prompt = f&#39;{LetCol.RESET}\nAll commands: \n|  play (easy\hard)  |  play2  |  \
+rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} &#39;
 
     def do_play(self, arg):
-        &#34;Enter 1 to play vs the computer, 2 for 2 player game.&#34;
+        &#34;&#34;&#34;Play versus computer, enter hard or easy as an argument after &#39;play&#39;.&#34;&#34;&#34;
         game = Game()
-        if arg == &#34;1&#34;:
-            game.playerVsMachine()
-        elif arg == &#34;2&#34;:
-            game.playerVsPlayer()
+        if arg == &#34;hard&#34;:
+            game.playerVsMachine(2)
+        elif arg == &#34;easy&#34;:
+            game.playerVsMachine(1)
         else:
-            print(f&#34;please press 1 or 2 (you pressed: {arg})&#34;)
+            print(&#34;Wrong argument, type easy or hard after &#39;play&#39;.&#34;)
+
+    def do_play2(self, arg):
+        &#34;&#34;&#34;2 player game.&#34;&#34;&#34;
+        game = Game()
+        game.playerVsPlayer()
 
     def do_scoreboard(self, arg):
-        &#39;Prints Scoreboard&#39;
-        scoreboard = Scoreboard()
+        &#34;&#34;&#34;Print Scoreboard.&#34;&#34;&#34;
+        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
         scoreboard.print_scorebard()
 
     def do_bye(self, arg):
-        &#34;close the game.&#34;
-        print(&#34;Thank you for playing. bye!!&#34;)
+        &#34;&#34;&#34;Close the game.&#34;&#34;&#34;
+        print(&#34;Thank you for playing. Bye!!&#34;)
         return True
 
     def do_rules(self, arg):
-        &#34;Show game rules.&#34;
+        &#34;&#34;&#34;Show game rules.&#34;&#34;&#34;
         DIVIDER = &#34;===================================================================\
 =======================================&#34;
         print(
-            f&#34;{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the\
+            f&#34;{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the \
 first player to \
 reach 100 points{LetCol.OKCYAN}\n\
 Players take turns to roll a single dice as many times\
@@ -179,14 +188,14 @@ their gained score for the turn if they roll a 1.\n{LetCol.HEADER}{DIVIDER}&#34;
 <span>def <span class="ident">do_bye</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>close the game.</p></div>
+<div class="desc"><p>Close the game.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def do_bye(self, arg):
-    &#34;close the game.&#34;
-    print(&#34;Thank you for playing. bye!!&#34;)
+    &#34;&#34;&#34;Close the game.&#34;&#34;&#34;
+    print(&#34;Thank you for playing. Bye!!&#34;)
     return True</code></pre>
 </details>
 </dd>
@@ -194,20 +203,35 @@ their gained score for the turn if they roll a 1.\n{LetCol.HEADER}{DIVIDER}&#34;
 <span>def <span class="ident">do_play</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Enter 1 to play vs the computer, 2 for 2 player game.</p></div>
+<div class="desc"><p>Play versus computer, enter hard or easy as an argument after 'play'.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def do_play(self, arg):
-    &#34;Enter 1 to play vs the computer, 2 for 2 player game.&#34;
+    &#34;&#34;&#34;Play versus computer, enter hard or easy as an argument after &#39;play&#39;.&#34;&#34;&#34;
     game = Game()
-    if arg == &#34;1&#34;:
-        game.playerVsMachine()
-    elif arg == &#34;2&#34;:
-        game.playerVsPlayer()
+    if arg == &#34;hard&#34;:
+        game.playerVsMachine(2)
+    elif arg == &#34;easy&#34;:
+        game.playerVsMachine(1)
     else:
-        print(f&#34;please press 1 or 2 (you pressed: {arg})&#34;)</code></pre>
+        print(&#34;Wrong argument, type easy or hard after &#39;play&#39;.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="cmd_game.PigGame.do_play2"><code class="name flex">
+<span>def <span class="ident">do_play2</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>2 player game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_play2(self, arg):
+    &#34;&#34;&#34;2 player game.&#34;&#34;&#34;
+    game = Game()
+    game.playerVsPlayer()</code></pre>
 </details>
 </dd>
 <dt id="cmd_game.PigGame.do_rules"><code class="name flex">
@@ -220,11 +244,11 @@ their gained score for the turn if they roll a 1.\n{LetCol.HEADER}{DIVIDER}&#34;
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">    def do_rules(self, arg):
-        &#34;Show game rules.&#34;
+        &#34;&#34;&#34;Show game rules.&#34;&#34;&#34;
         DIVIDER = &#34;===================================================================\
 =======================================&#34;
         print(
-            f&#34;{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the\
+            f&#34;{LetCol.HEADER}{DIVIDER}{LetCol.OKCYAN}\nIn this game wins the \
 first player to \
 reach 100 points{LetCol.OKCYAN}\n\
 Players take turns to roll a single dice as many times\
@@ -237,14 +261,14 @@ their gained score for the turn if they roll a 1.\n{LetCol.HEADER}{DIVIDER}&#34;
 <span>def <span class="ident">do_scoreboard</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Prints Scoreboard</p></div>
+<div class="desc"><p>Print Scoreboard.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def do_scoreboard(self, arg):
-    &#39;Prints Scoreboard&#39;
-    scoreboard = Scoreboard()
+    &#34;&#34;&#34;Print Scoreboard.&#34;&#34;&#34;
+    scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
     scoreboard.print_scorebard()</code></pre>
 </details>
 </dd>
@@ -267,6 +291,7 @@ their gained score for the turn if they roll a 1.\n{LetCol.HEADER}{DIVIDER}&#34;
 <li><code><a title="cmd_game.PigGame.DIVIDER" href="#cmd_game.PigGame.DIVIDER">DIVIDER</a></code></li>
 <li><code><a title="cmd_game.PigGame.do_bye" href="#cmd_game.PigGame.do_bye">do_bye</a></code></li>
 <li><code><a title="cmd_game.PigGame.do_play" href="#cmd_game.PigGame.do_play">do_play</a></code></li>
+<li><code><a title="cmd_game.PigGame.do_play2" href="#cmd_game.PigGame.do_play2">do_play2</a></code></li>
 <li><code><a title="cmd_game.PigGame.do_rules" href="#cmd_game.PigGame.do_rules">do_rules</a></code></li>
 <li><code><a title="cmd_game.PigGame.do_scoreboard" href="#cmd_game.PigGame.do_scoreboard">do_scoreboard</a></code></li>
 <li><code><a title="cmd_game.PigGame.intro" href="#cmd_game.PigGame.intro">intro</a></code></li>

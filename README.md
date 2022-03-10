@@ -21,12 +21,12 @@ The Pig Dice game is a fun exciting game which you can play and enjoy. The game 
 To start the game the user can use the command `make play` or simply run the cmd_game.py file.
 
 ### Commands
--play: Play vs the computer, the user must pass the game mode (easy, hard) as an argument. 
--play2: Two player game.
--rules: Show the rules.
--scoreboard: Print the scoreboard.
--bye : exit the game.
--help : Prints all the commands , if another command is passed as an argument instructions for this command will be printed.
+- play: Play vs the computer, the user must pass the game mode (easy, hard) as an argument. 
+- play2: Two player game.
+- rules: Show the rules.
+- scoreboard: Print the scoreboard.
+- bye : exit the game.
+- help : Prints all the commands , if another command is passed as an argument instructions for this command will be printed.
 
 ## Test
 In order to be able to test the different features we added some cheat codes, when asked for the user name use HIVA, YANA OR RODRI45Z . This will allow the user to start with a score of 100 and will instantly win the game.
@@ -60,9 +60,9 @@ Using data with the probabilities to win if the user turn total is 0 we can calc
 First step would be to set the python name used. Makefile uses `PYTHON=python` as default.
 create a virtual enviroment using the command `make venv`, once created the user should initiate this virtual enviroment using:
 
--. .venv/Scripts/activate (Windows)
+- . .venv/Scripts/activate (Windows)
 
--. .venv/bin/activate (linux/MacOS)
+- . .venv/bin/activate (linux/MacOS)
 
 Then once inside the virtual enviroment the user should install the required packages using `make install`
 

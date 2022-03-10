@@ -9,7 +9,7 @@ from Dice import Dice
 
 class Game:
     """Game class with methods for the game."""
-
+    
     def __init__(self):
         """Class constructor with GOAL and Divider as attributes."""
         self.GOAL = 100

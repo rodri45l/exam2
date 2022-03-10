@@ -19,7 +19,6 @@ class TestGame(unittest.TestCase):
 
     @patch('builtins.input', return_value="Rodri")
     def test_create_player(self, mock_input):
-        """Test create player."""
         game = Game.Game()
         player = game.createPlayer(1)
         exp = player.name == "Rodri"
@@ -129,6 +128,14 @@ Enter your choice: {Bcolors.RESET}"
         game = Game.Game()
         exp = game.playerVsMachine(2)
         self.assertEqual(exp, 2)
+
+    @patch("builtins.input", side_effect=["2"])
+    def test_playerTurn(self, mock_input):
+        """Test of computer turn difficulty hard."""
+        game = Game.Game()
+        player = Player("Rodri")
+        exp = game.playerTurn(player)
+        self.assertIsInstance(exp, Player)
 
     def test_computerTurn(self):
         """Test of computer turn difficulty hard."""

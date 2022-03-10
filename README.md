@@ -1,200 +1,75 @@
-Python development project template
-==========================
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+ Dice Game
+The Dice game is a fun exciting game which you can play and enjoy. In this game you have the choice to play with computer or second player. You can choose the level the difficulty; wheather you want to go hard or easy.
+While playing you have 5 options 1. roll your dice 2. hold your dice for the round 3.Change name 4.Restart 5.Exit;
+You can always decide to restart the game or even exit the game!if you feel like you dont like your name in the game and want to change it you can do it.There is a scoreboard in the game which hold the players records for all games so by requesting the scoreboard you get to see your score and other players scores as well.And a fun feature in our game we have cheat code so that if you input the cheat code your have a high chance to win the game!
 
-A template for a Python development project.
 
-[[_TOC_]]
+## Table of Contents
+* General Info
+* Technologies Used
+* Usage
+* Setup
+* Features
+* Project requirements
+* Acknowledgements
 
 
 
-Get going
---------------------------
 
-This is how you can work with the development environment.
+## General Information
+Starting the game:
+For starting the game, you can Give the command " make play " or you can run the cmd_game.py.
+After startin the game, you get to choose who you want to play with; computer or a second player? and also which level of difficulty you want to play with?
+You enter your name and the game starts.You have two options of rolling or holding the dice in your turn, 
+and after you did your turn the other player also play and again your turn. Every round there are other options for you aswell. the options are
+showed in the menu; Restart the game, Exit the game and Change your name.
+if you select restart the game; you would start your game all over again.
+if you select exit; you would exit the game. You can start over or you can see your socres; 
+if you wish to do that make the command " scoreboard " and the scoreboard is shown on the screen.
+if you select change your name, the game asks you to put your new name and immidietly your name is changed.
 
 
+## Technologies Used
+- Python - version 3.9
+- GitHub Desktop - Windows(64 bit)
+- GitKraken - version 8.3.1
 
-### Check version of Python
 
-Check what version of Python you have. The Makefile uses `PYTHON=python` as default.
+## Usage
+## How to run the complete testsuite and how to get the coverage report?
+## contain details on how one can regenerate the documentation from your code.
+## how to regenerate the UML diagrams of the documentation.
+## how you choosed to implement the intelligence part.
 
-```
-# Check you Python installation
-make version
-```
+## Setup
+Proceed to describe how to install / setup one's local environment / get started with the project.
+## instruction on how to install.
 
-If you have another naming of the Python executable then you can solve that using an environment variable. This is common on Mac and Linux.
 
-```
-# Set the environment variable to be your python executable
-export PYTHON=python3
-make version
-```
+## Features
+- Play an awesome amusing game with rolling your DICE!
+- Keep track of your score
 
-Read more on [GNU make](https://www.gnu.org/software/make/manual/make.html).
 
+## Project requirements
+1.Functionality
+2.Structure
+3.Unittesting
+4.Document by comments
+5.Generate documentation from comments
+6.Generate UML diagrams from code
+7.Use semantic versioning
+8.Code style
+9.README.md
+10.Presentation video
+(https://hkr.instructure.com/courses/4708/pages/assignment-2-test-driven-development)
 
 
-### Python virtual environment
 
-Install a Python virtual environment and activate it.
+## Acknowledgements
+- This project was based on [Assignment 2 - Test driven development](https://en.wikipedia.org/wiki/Pig_(dice_game)).
+- Thanks to our teacher Mikael Roos
 
-```
-# Create the virtual environment
-make venv
 
-# Activate on Windows
-. .venv/Scripts/activate
-
-# Activate on Linx/Mac
-. .venv/bin/activate
-```
-
-When you are done you can leave the venv using the command `deactivate`.
-
-Read more on [Python venv](https://docs.python.org/3/library/venv.html).
-
-
-
-### Install the dependencies
-
-Install the PIP packages that are dependencies to the project and/or the development environment. The dependencies are documented in the `requirements.txt`.
-
-Do not forget to check that you have an active venv.
-
-```
-# Do install them
-make install
-
-# Check what is installed
-make installed
-```
-
-Read more on [Python PIP](https://pypi.org/project/pip/).
-
-
-
-### Run the code
-
-The example program can be started like this.
-
-```
-# Execute the main program
-python guess/main.py
-```
-
-All code is stored below the directory `guess/`.
-
-
-
-### Run the validators
-
-You can run the static code validators like this. They check the sourcecode and exclude the testcode.
-
-```
-# Run each at a time
-make flake8
-make pylint
-
-# Run all on the same time
-make lint
-```
-
-You might need to update the Makefile if you change the name of the source directory currently named `guess/`.
-
-Read more on:
-
-* [flake8](https://flake8.pycqa.org/en/latest/)
-* [pylint](https://pylint.org/)
-
-
-
-### Run the unittests
-
-You can run the unittests like this. The testfiles are stored in the `test/` directory.
-
-```
-# Run unttests without coverage
-make unittest
-
-# Run unittests with coverage
-make coverage
-
-# Run the linters and the unittests with coverage
-make test
-```
-
-You can open a web browser to inspect the code coverage as a generated HTML report.
-
-```
-firefox htmlcov/index.html
-```
-
-Read more on:
-
-* [unittest](https://docs.python.org/3/library/unittest.html)
-* [coverage](https://coverage.readthedocs.io/)
-
-
-
-### Run parts of the testsuite
-
-You can also run parts of the testsuite, for examples files or methods in files.
-
-You can run all tests from a testfile.
-
-```
-# Run a testfile
-python -m unittest test.test_game
-```
-
-You can also run a single testcase from a file.
-
-```
-# Run a test method, in a class, in a testfile
-python -m unittest test.test_game.TestGameClass.test_init_default_object
-```
-
-
-
-### Remove generated files
-
-You can remove all generated files by this.
-
-```
-# Remove files generated for tests or caching
-make clean
-
-# Do also remove all you have installed
-make clean-all
-```
-
-
-
-Optional targets
---------------------------
-
-These targets might be helpful when running your project.
-
-
-
-### Codestyle with black
-
-You can unify the codestyle using black. Running black will change your source code to have a codestyle according to black codestyle.
-
-```
-# Same same, different names
-make black
-make codestyle
-```
-
-Read more on [black](https://pypi.org/project/black/).
-
-
-
-More targets
---------------------------
-
-The Makefile contains more targets, they are however not yet tested on this directory structure.
+Created by: Rodri, Yana, Hiva

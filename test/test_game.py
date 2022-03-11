@@ -25,6 +25,14 @@ class TestGame(unittest.TestCase):
         exp = player.name == "Rodri"
         self.assertTrue(exp)
 
+    @patch('builtins.input', side_effect=["    ", "Koki"])
+    def test_create_player_2(self, mock_input):
+        """Test create player."""
+        game = Game.Game()
+        player = game.createPlayer(1)
+        exp = player.name == "Koki"
+        self.assertTrue(exp)
+
     @patch('builtins.input', return_value="Rodri2")
     def test_change_name(self, mock_input):
         """Test change name."""
@@ -93,19 +101,7 @@ Enter your choice: {Bcolors.RESET}"
         game = Game.Game()
         exp = game.playerVsMachine(1)
         self.assertEqual(exp, 1)
-
-    @patch("builtins.input", side_effect=["RODRI45Z", "yana", "2"])
-    def test_playerVsplayer(self, mock_input):
-        """Test playervsplayer player 1 win"""
-        game = Game.Game()
-        game.playerVsPlayer()
-
-    @patch("builtins.input", side_effect=["Rodri45Z", "YANA", "2", "2"])
-    def test_playerVsplayer2(self, mock_input):
-        """Test playervsplayer player 2 win"""
-        game = Game.Game()
-        game.playerVsPlayer()
-
+    
     @patch("builtins.input", side_effect=["test"])
     def test_playerVsMachine4(self, mock_input):
         """Test playervsMachine computer wins"""
@@ -113,6 +109,20 @@ Enter your choice: {Bcolors.RESET}"
         exp = game.playerVsMachine(2)
         self.assertEqual(exp, 2)
 
+    @patch("builtins.input", side_effect=["RODRI45Z", "yana", "2"])
+    def test_playerVsplayer(self, mock_input):
+        """Test playervsplayer player 1 win"""
+        game = Game.Game()
+        exp = game.playerVsPlayer()
+        self.assertEqual(exp, 1)
+
+    @patch("builtins.input", side_effect=["Rodri45Z", "YANA", "2", "2"])
+    def test_playerVsplayer2(self, mock_input):
+        """Test playervsplayer player 2 win"""
+        game = Game.Game()
+        exp = game.playerVsPlayer()
+        self.assertEqual(exp, 2)    
+    
     def test_computerTurn(self):
         """Test of computer turn difficulty hard."""
         game = Game.Game()
@@ -152,3 +162,11 @@ Enter your choice: {Bcolors.RESET}"
         player = Player("Rodri")
         game.update_scoreboard(player)
         self.assertTrue(mock.called)
+
+    @patch("builtins.input", side_effect=["2"])
+    def test_playerTurn(self, mock_input):
+        """Test of computer turn difficulty hard."""
+        game = Game.Game()
+        player = Player("Rodri")
+        exp = game.playerTurn(player)
+        self.assertIsInstance(exp, Player)

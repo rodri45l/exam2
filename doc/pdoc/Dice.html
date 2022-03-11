@@ -40,7 +40,7 @@ class Dice:
         self.roll = 0
 
     def roll_dice(self, print_dice):
-        &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice&#34;&#34;&#34;
+        &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice.&#34;&#34;&#34;
         with open(&#34;./diceGame/dice_drawings.pickle&#34;, &#34;rb&#34;) as handle:
             dice_face_dic = pickle.load(handle)
             self.roll = randint(1, 6)
@@ -75,7 +75,7 @@ class Dice:
         self.roll = 0
 
     def roll_dice(self, print_dice):
-        &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice&#34;&#34;&#34;
+        &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice.&#34;&#34;&#34;
         with open(&#34;./diceGame/dice_drawings.pickle&#34;, &#34;rb&#34;) as handle:
             dice_face_dic = pickle.load(handle)
             self.roll = randint(1, 6)
@@ -88,13 +88,13 @@ class Dice:
 <span>def <span class="ident">roll_dice</span></span>(<span>self, print_dice)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set roll attribute as a random number from 1 to 6 and print dice</p></div>
+<div class="desc"><p>Set roll attribute as a random number from 1 to 6 and print dice.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def roll_dice(self, print_dice):
-    &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice&#34;&#34;&#34;
+    &#34;&#34;&#34;Set roll attribute as a random number from 1 to 6 and print dice.&#34;&#34;&#34;
     with open(&#34;./diceGame/dice_drawings.pickle&#34;, &#34;rb&#34;) as handle:
         dice_face_dic = pickle.load(handle)
         self.roll = randint(1, 6)

@@ -50,7 +50,7 @@ def should_roll(i, j, k):
     &#34;&#34;&#34;Return a boolean depending on if the player should roll or not.&#34;&#34;&#34;
     # i = Player score
     # j = Oponents score
-    # k = PLayers total
+    # k = PLayers turn total
     p_roll = 1 - p_win(j, i, 0)
     for dice in range(2, 7):
         p_roll += p_win(i, j, k + dice)
@@ -155,7 +155,7 @@ def p_win(i, j, k):
     &#34;&#34;&#34;Return a boolean depending on if the player should roll or not.&#34;&#34;&#34;
     # i = Player score
     # j = Oponents score
-    # k = PLayers total
+    # k = PLayers turn total
     p_roll = 1 - p_win(j, i, 0)
     for dice in range(2, 7):
         p_roll += p_win(i, j, k + dice)

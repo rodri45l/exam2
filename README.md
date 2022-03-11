@@ -54,6 +54,8 @@ The module should_roll contains the source code. Using the data the function sho
 
 Using data with the probabilities to win if the user turn total is 0 we can calculate the probabilities for the rest of scores and then calculate the choice with more probabilities.
 
+![Probabilities model](https://en.wikipedia.org/wiki/File:OptimalPig.jpg)
+
 
 ## Setup
 Before you start make sure to install Graphviz from the Choco package manager and run all commands from git bash if you use Windows.

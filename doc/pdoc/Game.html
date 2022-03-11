@@ -45,21 +45,32 @@ class Game:
         self.DIVIDER = &#34;===================================================================\
 =======================================&#34;
 
+    def update_scoreboard(self, player):
+        &#34;&#34;&#34;Update scoreboard data.&#34;&#34;&#34;
+        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+        scoreboard.update_player(player)
+
     def showOptionMenu(self, name):
         &#34;&#34;&#34;Print a menu with options.&#34;&#34;&#34;
         try:
-            option = int(input(f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
+            option = int(
+                input(
+                    f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
 {Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
 1 to roll the dice\n\
 2 to hold your score\n\
 3 to change your name\n\
 4 to restart\n\
 5 to exit the game\n\
-Enter your choice: {Bcolors.RESET}&#34;))
+Enter your choice: {Bcolors.RESET}&#34;
+                )
+            )
             if option not in range(1, 6):
-                raise ValueError(&#39;Problem!&#39;)
+                raise ValueError(&#34;Problem!&#34;)
         except ValueError:
-            print(f&#39;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#39;)
+            print(
+                f&#34;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#34;
+            )
             return self.showOptionMenu(name)
 
         return option
@@ -67,16 +78,16 @@ Enter your choice: {Bcolors.RESET}&#34;))
     def createPlayer(self, n):
         &#34;&#34;&#34;Create player.&#34;&#34;&#34;
         name = input(
-                f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
+            f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}&#34;
-            )
-        
+        )
+
         if len(name.replace(&#34; &#34;, &#34;&#34;)) == 0:
-            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            print(f&#34;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#34;)
             player = self.createPlayer(n)
         else:
-            player = Player(name)        
-        
+            player = Player(name)
+
         return player
 
     def playerVsMachine(self, difficulty):
@@ -111,8 +122,7 @@ enter your name: {Bcolors.RESET}&#34;
             )
             print(f&#34;{self.DIVIDER}&#34;)
             player.won = True
-            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 1
         elif computer.score &gt;= self.GOAL:
             print(f&#34;{Bcolors.FAIL}You lose, Computers &gt; Humans&#34;)
@@ -120,8 +130,7 @@ enter your name: {Bcolors.RESET}&#34;
                 f&#34;Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}&#34;
             )
-            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 2
 
     def playerTurn(self, player):
@@ -138,7 +147,7 @@ Computer: {computer.score}&#34;
                 player.score = -2
                 return player
             elif option == 5:
-                print(&#39;Game halted!&#39;)
+                print(&#34;Game halted!&#34;)
                 player.score = -1
                 return player
             elif option == 3:
@@ -244,9 +253,9 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
             f&#34;Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}&#34;
         )
-        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-        scoreboard.update_player(player1)
-        scoreboard.update_player(player2)
+        self.update_scoreboard(player1)
+        self.update_scoreboard(player2)
+
         if player1.won:
             return 1
         else:
@@ -254,15 +263,13 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 
     def change_name(self, player):
         &#34;&#34;&#34;Change name.&#34;&#34;&#34;
-        new_name = input(&#39;Enter new name: &#39;)
+        new_name = input(&#34;Enter new name: &#34;)
 
         if len(new_name.replace(&#34; &#34;, &#34;&#34;)) == 0:
-            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            print(f&#34;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#34;)
             self.change_name(player)
         else:
-            player.change_name(new_name)
-
-        </code></pre>
+            player.change_name(new_name)</code></pre>
 </details>
 </section>
 <section>
@@ -293,21 +300,32 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
         self.DIVIDER = &#34;===================================================================\
 =======================================&#34;
 
+    def update_scoreboard(self, player):
+        &#34;&#34;&#34;Update scoreboard data.&#34;&#34;&#34;
+        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+        scoreboard.update_player(player)
+
     def showOptionMenu(self, name):
         &#34;&#34;&#34;Print a menu with options.&#34;&#34;&#34;
         try:
-            option = int(input(f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
+            option = int(
+                input(
+                    f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
 {Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
 1 to roll the dice\n\
 2 to hold your score\n\
 3 to change your name\n\
 4 to restart\n\
 5 to exit the game\n\
-Enter your choice: {Bcolors.RESET}&#34;))
+Enter your choice: {Bcolors.RESET}&#34;
+                )
+            )
             if option not in range(1, 6):
-                raise ValueError(&#39;Problem!&#39;)
+                raise ValueError(&#34;Problem!&#34;)
         except ValueError:
-            print(f&#39;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#39;)
+            print(
+                f&#34;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#34;
+            )
             return self.showOptionMenu(name)
 
         return option
@@ -315,16 +333,16 @@ Enter your choice: {Bcolors.RESET}&#34;))
     def createPlayer(self, n):
         &#34;&#34;&#34;Create player.&#34;&#34;&#34;
         name = input(
-                f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
+            f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}&#34;
-            )
-        
+        )
+
         if len(name.replace(&#34; &#34;, &#34;&#34;)) == 0:
-            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            print(f&#34;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#34;)
             player = self.createPlayer(n)
         else:
-            player = Player(name)        
-        
+            player = Player(name)
+
         return player
 
     def playerVsMachine(self, difficulty):
@@ -359,8 +377,7 @@ enter your name: {Bcolors.RESET}&#34;
             )
             print(f&#34;{self.DIVIDER}&#34;)
             player.won = True
-            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 1
         elif computer.score &gt;= self.GOAL:
             print(f&#34;{Bcolors.FAIL}You lose, Computers &gt; Humans&#34;)
@@ -368,8 +385,7 @@ enter your name: {Bcolors.RESET}&#34;
                 f&#34;Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}&#34;
             )
-            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 2
 
     def playerTurn(self, player):
@@ -386,7 +402,7 @@ Computer: {computer.score}&#34;
                 player.score = -2
                 return player
             elif option == 5:
-                print(&#39;Game halted!&#39;)
+                print(&#34;Game halted!&#34;)
                 player.score = -1
                 return player
             elif option == 3:
@@ -492,9 +508,9 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
             f&#34;Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}&#34;
         )
-        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-        scoreboard.update_player(player1)
-        scoreboard.update_player(player2)
+        self.update_scoreboard(player1)
+        self.update_scoreboard(player2)
+
         if player1.won:
             return 1
         else:
@@ -502,10 +518,10 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 
     def change_name(self, player):
         &#34;&#34;&#34;Change name.&#34;&#34;&#34;
-        new_name = input(&#39;Enter new name: &#39;)
+        new_name = input(&#34;Enter new name: &#34;)
 
         if len(new_name.replace(&#34; &#34;, &#34;&#34;)) == 0:
-            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            print(f&#34;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#34;)
             self.change_name(player)
         else:
             player.change_name(new_name)</code></pre>
@@ -523,10 +539,10 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 </summary>
 <pre><code class="python">def change_name(self, player):
     &#34;&#34;&#34;Change name.&#34;&#34;&#34;
-    new_name = input(&#39;Enter new name: &#39;)
+    new_name = input(&#34;Enter new name: &#34;)
 
     if len(new_name.replace(&#34; &#34;, &#34;&#34;)) == 0:
-        print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+        print(f&#34;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#34;)
         self.change_name(player)
     else:
         player.change_name(new_name)</code></pre>
@@ -579,16 +595,16 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 <pre><code class="python">    def createPlayer(self, n):
         &#34;&#34;&#34;Create player.&#34;&#34;&#34;
         name = input(
-                f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
+            f&#34;\n{Bcolors.OKCYAN}Please Player {n} \
 enter your name: {Bcolors.RESET}&#34;
-            )
-        
+        )
+
         if len(name.replace(&#34; &#34;, &#34;&#34;)) == 0:
-            print(f&#39;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#39;)
+            print(f&#34;\n{Bcolors.FAIL}Please input a valid name{Bcolors.RESET}&#34;)
             player = self.createPlayer(n)
         else:
-            player = Player(name)        
-        
+            player = Player(name)
+
         return player</code></pre>
 </details>
 </dd>
@@ -615,7 +631,7 @@ enter your name: {Bcolors.RESET}&#34;
                 player.score = -2
                 return player
             elif option == 5:
-                print(&#39;Game halted!&#39;)
+                print(&#34;Game halted!&#34;)
                 player.score = -1
                 return player
             elif option == 3:
@@ -687,8 +703,7 @@ enter your name: {Bcolors.RESET}&#34;
             )
             print(f&#34;{self.DIVIDER}&#34;)
             player.won = True
-            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 1
         elif computer.score &gt;= self.GOAL:
             print(f&#34;{Bcolors.FAIL}You lose, Computers &gt; Humans&#34;)
@@ -696,8 +711,7 @@ enter your name: {Bcolors.RESET}&#34;
                 f&#34;Final Score:\n{player.name}: {player.score}\n\
 Computer: {computer.score}&#34;
             )
-            scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-            scoreboard.update_player(player)
+            self.update_scoreboard(player)
             return 2</code></pre>
 </details>
 </dd>
@@ -761,9 +775,9 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
             f&#34;Final Score:\n{player1.name}: {player1.score}\n\
 {player2.name}: {player2.score}&#34;
         )
-        scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
-        scoreboard.update_player(player1)
-        scoreboard.update_player(player2)
+        self.update_scoreboard(player1)
+        self.update_scoreboard(player2)
+
         if player1.won:
             return 1
         else:
@@ -782,21 +796,42 @@ It&#39;s Your turn!\n{self.DIVIDER}&#34;
 <pre><code class="python">    def showOptionMenu(self, name):
         &#34;&#34;&#34;Print a menu with options.&#34;&#34;&#34;
         try:
-            option = int(input(f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
+            option = int(
+                input(
+                    f&#34;{Bcolors.HEADER}{self.DIVIDER}\n\
 {Bcolors.UNDERLINE}Please {name} enter:{Bcolors.NOT_UNDERLINED}\n\
 1 to roll the dice\n\
 2 to hold your score\n\
 3 to change your name\n\
 4 to restart\n\
 5 to exit the game\n\
-Enter your choice: {Bcolors.RESET}&#34;))
+Enter your choice: {Bcolors.RESET}&#34;
+                )
+            )
             if option not in range(1, 6):
-                raise ValueError(&#39;Problem!&#39;)
+                raise ValueError(&#34;Problem!&#34;)
         except ValueError:
-            print(f&#39;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#39;)
+            print(
+                f&#34;\n{Bcolors.FAIL}Please input a number between 1 and 5{Bcolors.RESET}&#34;
+            )
             return self.showOptionMenu(name)
 
         return option</code></pre>
+</details>
+</dd>
+<dt id="Game.Game.update_scoreboard"><code class="name flex">
+<span>def <span class="ident">update_scoreboard</span></span>(<span>self, player)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update scoreboard data.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_scoreboard(self, player):
+    &#34;&#34;&#34;Update scoreboard data.&#34;&#34;&#34;
+    scoreboard = Scoreboard(&#34;./diceGame/scoreboard.pickle&#34;)
+    scoreboard.update_player(player)</code></pre>
 </details>
 </dd>
 </dl>
@@ -822,6 +857,7 @@ Enter your choice: {Bcolors.RESET}&#34;))
 <li><code><a title="Game.Game.playerVsMachine" href="#Game.Game.playerVsMachine">playerVsMachine</a></code></li>
 <li><code><a title="Game.Game.playerVsPlayer" href="#Game.Game.playerVsPlayer">playerVsPlayer</a></code></li>
 <li><code><a title="Game.Game.showOptionMenu" href="#Game.Game.showOptionMenu">showOptionMenu</a></code></li>
+<li><code><a title="Game.Game.update_scoreboard" href="#Game.Game.update_scoreboard">update_scoreboard</a></code></li>
 </ul>
 </li>
 </ul>

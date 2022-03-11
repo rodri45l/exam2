@@ -42,8 +42,8 @@ class PigGame(cmd.Cmd):
     intro = f&#34;{LetCol.HEADER}{DIVIDER}\n\
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
 {LetCol.HEADER}{DIVIDER}{LetCol.RESET}&#34;
-    prompt = f&#39;{LetCol.RESET}\nAll commands: \n|  play (easy\hard)  |  play2  |  \
-rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} &#39;
+    prompt = f&#34;{LetCol.RESET}\nAll commands: \n|  play (easy\hard)  |  play2  |  \
+rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} &#34;
 
     def do_play(self, arg):
         &#34;&#34;&#34;Play versus computer, enter hard or easy as an argument after &#39;play&#39;.&#34;&#34;&#34;
@@ -99,7 +99,7 @@ if __name__ == &#34;__main__&#34;:
 <dl>
 <dt id="cmd_game.PigGame"><code class="flex name class">
 <span>class <span class="ident">PigGame</span></span>
-<span>(</span><span>completekey='tab', stdin=None, stdout=None)</span>
+<span>(</span><span>completekey='tab', stdin=sys.stderr, stdout=sys.stderr)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>PigGame cmd Class.</p>
@@ -122,8 +122,8 @@ sys.stdin and sys.stdout are used.</p></div>
     intro = f&#34;{LetCol.HEADER}{DIVIDER}\n\
 {LetCol.OKBLUE}{LetCol.UNDERLINE}Welcome to the dice game PIG.{LetCol.RESET}\n\
 {LetCol.HEADER}{DIVIDER}{LetCol.RESET}&#34;
-    prompt = f&#39;{LetCol.RESET}\nAll commands: \n|  play (easy\hard)  |  play2  |  \
-rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} &#39;
+    prompt = f&#34;{LetCol.RESET}\nAll commands: \n|  play (easy\hard)  |  play2  |  \
+rules  |  scoreboard |  help |  bye  |\n\n{LetCol.WARNING}Enter a command:{LetCol.RESET} &#34;
 
     def do_play(self, arg):
         &#34;&#34;&#34;Play versus computer, enter hard or easy as an argument after &#39;play&#39;.&#34;&#34;&#34;

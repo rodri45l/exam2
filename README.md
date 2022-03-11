@@ -54,7 +54,7 @@ The module should_roll contains the source code. Using the data the function sho
 
 Using data with the probabilities to win if the user turn total is 0 we can calculate the probabilities for the rest of scores and then calculate the choice with more probabilities.
 
-![Probabilities model](https://en.wikipedia.org/wiki/File:OptimalPig.jpg)
+![Probabilities model](https://upload.wikimedia.org/wikipedia/en/thumb/6/65/OptimalPig.jpg/220px-OptimalPig.jpg)
 
 
 ## Setup

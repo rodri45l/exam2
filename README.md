@@ -57,6 +57,7 @@ Using data with the probabilities to win if the user turn total is 0 we can calc
 
 ## Setup
 Before you start make sure to install Graphviz from the Choco package manager and run all commands from git bash if you use Windows.
+
 First step would be to set the python name used. Makefile uses `PYTHON=python` as default.
 create a virtual enviroment using the command `make venv`, once created the user should initiate this virtual enviroment using:
 

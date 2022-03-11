@@ -15,14 +15,14 @@ class TestCmd(unittest.TestCase):
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         self.assertIsInstance(cmd_g, cmd_game.PigGame)
 
-    @mock.patch('Game.Game.playerVsMachine')
+    @mock.patch("Game.Game.playerVsMachine")
     def test_do_play_1(self, mock):
         """Test if do_play calls playerVsMachine func."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
         cmd_g.do_play("hard")
         self.assertTrue(mock.called)
 
-    @mock.patch('Game.Game.playerVsMachine')
+    @mock.patch("Game.Game.playerVsMachine")
     def test_do_play_2(self, mock):
         """Test if do_play calls playerVsMachine func."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
@@ -33,11 +33,11 @@ class TestCmd(unittest.TestCase):
     def test_do_play3(self, mock):
         """Test if we pass an argument other thatn 1 or 2."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)
-        cmd_g.do_play('3')
+        cmd_g.do_play("3")
         str = "Wrong argument, type easy or hard after 'play'."
         mock.assert_called_with(str)
 
-    @mock.patch('Game.Game.playerVsPlayer')
+    @mock.patch("Game.Game.playerVsPlayer")
     def test_do_play2(self, mock):
         """Test if do_play2 calls playerVsPlayer func."""
         cmd_g = cmd_game.PigGame(cmd.Cmd)

@@ -33,7 +33,7 @@ class TestScoreboard(unittest.TestCase):
 ##############################################################\
 ############################################"
         for key, item in sb.items():
-            wr = item[0]/item[1]
+            wr = item[0] / item[1]
             str += f"\n{B.Bcolors.OKGREEN}{key}: Matches won: {item[0]} Matches \
 played: {item[1]} Winrate: {(wr*100):.2f}%"
         scoreboard.print_scorebard()

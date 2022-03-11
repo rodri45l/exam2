@@ -1,6 +1,7 @@
 """Scoreboard module."""
 import pickle
 import Bcolors as B
+
 # "./diceGame/scoreboard.pickle"
 
 

@@ -29,4 +29,3 @@ class test_should_roll(unittest.TestCase):
         """Test probabilities of winning"""
         exp = should_roll.p_win(99, 0, 99)
         self.assertEqual(exp, 1)
-        

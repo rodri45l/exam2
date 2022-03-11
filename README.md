@@ -1,8 +1,10 @@
 
-Dice Game
-The Dice game is a fun exciting game which you can play and enjoy. In this game you have the choice to play with computer or second player. You can choose the level the difficulty; wheather you want to go hard or easy.
-While playing you have 5 options 1. roll your dice 2. hold your dice for the round 3.Change name 4.Restart 5.Exit;
-You can always decide to restart the game or even exit the game!if you feel like you dont like your name and want to change it you can.There is a scoreboard in the game which hold the players records for all games so by requesting the scoreboard you get to see your score and other players  as well.And a fun feature in our game we have cheat code so that if you input the cheat code your have a high chance to win the game!
+Pig Dice Game
+==========================
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+
+The Pig Dice game is a fun exciting game which you can play and enjoy. The game of Pig is a very simple jeopardy dice game in which two players race to reach 100 points. Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player holds and scores the sum of the rolls (i.e. the turn total).
 
 
 ## Table of Contents
@@ -16,33 +18,55 @@ You can always decide to restart the game or even exit the game!if you feel like
 
 
 ## General Information
-Starting the game:
-For starting the game, you can Give the command "make play" or you can run the cmd_game.py.
-After startin the game, you get to choose who you want to play with; computer or a second player? and also which level of difficulty you want to play with?
-You enter your name and the game starts.You have two options of rolling or holding the dice in your turn, 
-and after you did your turn the other player also play and again your turn. Every round there are other options for you aswell. the options are showed in the menu; Restart the game, Exit the game and Change your name.
-if you select restart the game; you would start your game all over again.
-if you select exit; you would exit the game. You can start over or you can see your socres; 
-if you wish to do that make the command "scoreboard" and the scoreboard is shown on the screen.
-if you select change your name, the game asks you to put your new name and immidietly your name is changed.
+To start the game the user can use the command `make play` or simply run the cmd_game.py file.
 
+### Commands
+- `play`: Play vs the computer, the user must pass the game mode (easy, hard) as an argument. 
+- `play2`: Two player game.
+- `rules`: Show the rules.
+- `scoreboard`: Print the scoreboard.
+- `bye` : exit the game.
+- `help` : Prints all the commands , if another command is passed as an argument instructions for this command will be printed.
+
+## Test/Cheat
+In order to be able to test the different features we added some cheat codes, when asked for the user name use HIVA, YANA OR RODRI45Z . This will allow the user to start with a score of 100 and will instantly win the game.
+There is a 4th name that can be used, if the player name is "test" the computer will instantly win the game.
 
 ## Technologies Used
-- Python - version 3.9
-- GitHub Desktop - Windows(64 bit)
-- GitKraken - version 8.3.1
+- Python - version 3.9 [![Language used: Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://github.com/python)
+- Git - version 2.25.1 
 
 
-## Usage
-## How to run the complete testsuite and how to get the coverage report?
-## contain details on how one can regenerate the documentation from your code.
-## how to regenerate the UML diagrams of the documentation.
-## how you choosed to implement the intelligence part.
+## Run testsuit
+TO run the full testsuit use the following command `make test`
+## Documentation
+Original documentation can be found in the doc folder. To regenerate documentation simply run `make doc`
+## Game Intelligence
+
+Our game has 2 modes of intelligence.
+First one is the "easy" mode , where the computer just chooses a random option (roll or hold).
+There is one more mode available to play , the "hard" mode.
+
+
+The hard mode was developed using data and equations from [Optimal Play of the Dice Game Pig](http://cs.gettysburg.edu/~tneller/papers/pig.zip)
+The module should_roll contains the source code. Using the data the function should_roll() calculates the choice with more chances of winning. These probabilities were calculated using [value iteration](https://en.wikipedia.org/wiki/Markov_decision_process#Value_iteration). 
+
+Using data with the probabilities to win if the user turn total is 0 we can calculate the probabilities for the rest of scores and then calculate the choice with more probabilities.
+
+
+
 
 ## Setup
-Proceed to describe how to install / setup one's local environment / get started with the project.
+First step would be to set the python name used. Makefile uses `PYTHON=python` as default.
+create a virtual enviroment using the command `make venv`, once created the user should initiate this virtual enviroment using:
 
-## instruction on how to install.
+- . .venv/Scripts/activate (Windows)
+
+- . .venv/bin/activate (linux/MacOS)
+
+Then once inside the virtual enviroment the user should install the required packages using `make install`
+
+After this the user can simply run `make play` to play the game or run the cmd_game.py file in the diceGame folder.
 
 
 ## Features

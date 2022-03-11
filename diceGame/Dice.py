@@ -11,7 +11,7 @@ class Dice:
         self.roll = 0
 
     def roll_dice(self, print_dice):
-        """Set roll attribute as a random number from 1 to 6 and print dice"""
+        """Set roll attribute as a random number from 1 to 6 and print dice."""
         with open("./diceGame/dice_drawings.pickle", "rb") as handle:
             dice_face_dic = pickle.load(handle)
             self.roll = randint(1, 6)
